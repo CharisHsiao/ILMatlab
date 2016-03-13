@@ -22,7 +22,7 @@ function varargout = DirectMainUI(varargin)
 
 % Edit the above text to modify the response to help DirectMainUI
 
-% Last Modified by GUIDE v2.5 07-Apr-2013 18:16:00
+% Last Modified by GUIDE v2.5 12-Mar-2016 17:06:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -70,11 +70,11 @@ set(handles.FTpanel,'Position',pan1pos)
 
 global caSize oaSize ibSize KSsaved KS
 KSsaved=KS;
-set(handles.SizeText,'String',['耦合点数=' num2str(caSize) '  响应点数=' num2str(oaSize)  '  激励点数=' num2str(ibSize)]); 
+set(handles.SizeText,'String',['耦合点数=' num2str(caSize) '  响应点数=' num2str(oaSize)  '  激励点数=' num2str(ibSize)]); %设置对象属性值
 KsDraw(1);
 
 % --- Outputs from this function are returned to the command line.
-function varargout = DirectMainUI_OutputFcn(hObject, eventdata, handles) 
+function varargout = DirectMainUI_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -85,7 +85,7 @@ varargout{1} = handles.output;
 
 function KsDraw(n)
 global f KS
-cla;
+cla;    %清除图像
 handles=guidata(gcf);
    set(handles.KSn,'String',num2str(n));
     plot(handles.axes1,f(:),abs(KS(n,:)));
@@ -144,7 +144,7 @@ if b~=n
     n=0;
 end
 
-if  n>caSize|| n<1 
+if  n>caSize|| n<1
 	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
     set(handles.KSn,'String',KSntemp);
     n=KSntemp;
@@ -175,7 +175,7 @@ function KSnext_Callback(hObject, eventdata, handles)
 global caSize
 n=str2num(get(handles.KSn,'String'));
 n=n+1;
-if  n>caSize|| n<1 
+if  n>caSize|| n<1
      n=n-1;
 	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
 else
@@ -190,7 +190,7 @@ function KSlast_Callback(hObject, eventdata, handles)
 global caSize
 n=str2num(get(handles.KSn,'String'));
 n=n-1;
-if  n>caSize|| n<1 
+if  n>caSize|| n<1
      n=n+1;
 	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
 else
@@ -255,7 +255,7 @@ pcParameter=inputdlg({'oa','ib'},'设定路径贡献参数',1,defaultanswer);
 oa=str2num(pcParameter{1});
 ib=str2num(pcParameter{2});
 if oa<=oaSize&&ib<=ibSize  %x==fix(x) fix（x)为取整
-PC=zeros(caSize,1);    
+PC=zeros(caSize,1);
 for j=1:caSize
     temp=0;
     for k=1:401
@@ -341,7 +341,7 @@ if Myoa<=oaSize&&0<Myoa
             set(handles.sliderIB,'Max',ibSize);
             p=1/ibSize;
             set(handles.sliderIB,'SliderStep', [p p]);
-            PC=zeros(caSize,1);    
+            PC=zeros(caSize,1);
             for j=1:caSize
                 temp=0;
                 for k=1:401
@@ -350,7 +350,7 @@ if Myoa<=oaSize&&0<Myoa
                 PC(j)= sqrt(temp/401);
             end
             yPC=abs(PC);
-            bar(yPC); 
+            bar(yPC);
             xlabel('测量点');ylabel('');
             title(strcat('PC: ',num2str(Myib),' TO ',num2str(Myoa)));
     else
@@ -394,9 +394,9 @@ else
 	errordlg({'输入的数值不在范围内！';['      0<ib<=' num2str(ibSize)]},'Error');
 	ib=round(get(handles.slider3,'Value'));
 	set(handles.ib_edit,'String',num2str(ib));
-end       
-    
-            
+end
+
+
 % --- Executes on slider movement.
 function sliderIB_Callback(hObject, eventdata, handles)
 % hObject    handle to sliderIB (see GCBO)
@@ -619,3 +619,11 @@ function about_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 msgbox({'珠海广通客车有限公司','','客车装配动态质量逆子结构检测技术软件','','珠海市科工贸信局-暨南大学产学研项目资助','','2013年6月   v2.0'},'关于IVSSA', 'none','modal');
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over KSpushbutton.
+function KSpushbutton_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to KSpushbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

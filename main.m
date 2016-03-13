@@ -5,9 +5,9 @@ function main
 %-------------------------------------------------------------------------------------------
 %------------splash-------------------------
 I = imread('splash.jpg');
-input('y=');
-time=3000;
-%% Create splash screen
+%input('y=');     %仅用于手动控制开始  变量y无实质作用
+time=1000;    %开始界面停留3000毫秒
+%% Create splash screen     %使用JAVA生成开始的界面
 splashImage = im2java(I);
 win = javax.swing.JWindow;
 icon = javax.swing.ImageIcon(splashImage);
@@ -25,9 +25,9 @@ imgHeight = icon.getIconHeight;
 imgWidth = icon.getIconWidth;
 win.setLocation((screenWidth-imgWidth)/2,(screenHeight-imgHeight)/2);
 win.show % show the splash screen
-% win.toFront %raise the splash window to the top (foreground) 
+% win.toFront %raise the splash window to the top (foreground)
 
-%% controling the duration time
+%% controling the duration time    %控制开始界面显示时间  3000毫秒
 if ~isempty(time)
     tic;
     while toc < time/1000
@@ -36,4 +36,4 @@ if ~isempty(time)
 end
 %---------------------splash-end--------------------------------
 
-ImportUI
+ImportUI    %加载初始选择界面

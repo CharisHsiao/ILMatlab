@@ -3,32 +3,32 @@ function [KS C Hoaca Hcbib]=loadcbf2(path,size)
 %      Software of indirect inverse sub-structure dynamic analysis based on MATLAB
 %                            Copyright ? 2013  by  Manhua Jiang
 %-------------------------------------------------------------------------------------------
-global f;
+global f;    %暂时不知 f 作用  2016-03-12-19:56
 
 matLength=401;
 
-    hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
-    HAcaca = myload2 (path,'HAcaca','HAca','ca',size);
+    hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    %function ret=myload2(path,name,head,tail,size)
+    HAcaca = myload2 (path,'HAcaca','Hca','ca',size);       %HAcaca = myload2 (path,'HAcaca','HAca','ca',size);
     waitbar(1/5,hwait,'已载入HAcaca');
-    HBcbcb = myload2 (path,'HBcbcb','HBcb','cb',size);
+    HBcbcb = myload2 (path,'HBcbcb','Hcb','cb',size);       %HBcbcb = myload2 (path,'HBcbcb','HBcb','cb',size);
     waitbar(2/5,hwait,'已载入HBcbcb');
-    HAoaca = myload2 (path,'HAoaca','HAoa','ca',size);
+    HAoaca = myload2 (path,'HAoaca','Hoa','ca',size);       %HAoaca = myload2 (path,'HAoaca','HAoa','ca',size);
     waitbar(3/5,hwait,'已载入HAoaca');
-    HBcbib = myload2 (path,'HBcbib','HBcb','ib',size);
+    HBcbib = myload2 (path,'HBcbib','Hcb','ib',size);       %HBcbib = myload2 (path,'HBcbib','HBcb','ib',size);
     waitbar(4/5,hwait,'已载入HBcbib');
-    Hsoaib = myload2(path,'Hsoaib','Hsoa','ib',size);
+    Hsoaib = myload2(path,'Hsoaib','Hsoa','ib',size);        %Hsoaib = myload2(path,'Hsoaib','Hsoa','ib',size);
     waitbar(1,hwait,'已载入Hsoaib');
     pause(0.1);
     close(hwait);
 
     msg=msgbox('载入计算中，请稍后...[计算完成后本对话框将自动关闭]','提示', 'help','modal');
-    
+
 %预留临时变量空间
     HAcacaTemp=zeros(size,size);
     HAoacaTemp=zeros(size,size);
     HBcbcbTemp=zeros(size,size);
     HBcbibTemp=zeros(size,size);
-    HsoaibTemp=zeros(size,size);    
+    HsoaibTemp=zeros(size,size);
         %预留结果保存变量空间
 Ks=zeros(size,size,matLength);
 Hcaca=zeros(size,size,matLength);
@@ -45,7 +45,7 @@ for k=2:matLength%k为1时计算结果为NaN，跳过
             HAoacaTemp(i,j) = HAoaca(matLength*(i-1)+k,j);
             HBcbcbTemp(i,j) = HBcbcb(matLength*(i-1)+k,j);
             HBcbibTemp(i,j) = HBcbib(matLength*(i-1)+k,j);
-            HsoaibTemp(i,j) = Hsoaib(matLength*(i-1)+k,j);            
+            HsoaibTemp(i,j) = Hsoaib(matLength*(i-1)+k,j);
         end
     end
     D=HAcacaTemp+HBcbcbTemp;
@@ -53,7 +53,7 @@ for k=2:matLength%k为1时计算结果为NaN，跳过
     Hcaca(:,:,k)=HAcacaTemp;
     Hcbcb(:,:,k)=HBcbcbTemp;
     Hoaca(:,:,k)=HAoacaTemp;
-    Hcbib(:,:,k)=HBcbibTemp;            
+    Hcbib(:,:,k)=HBcbibTemp;
     C(:,:,k)=inv(Hcaca(:,:,k).*I+Hcbcb(:,:,k).*I+inv(Ks(:,:,k).*I));
 end
 
@@ -69,12 +69,12 @@ temp=KS;
  KK=max(1./f(2:401));
  t=15;
  for i=1:size
-    for n=(t+1):(length(f)-t-1)    
+    for n=(t+1):(length(f)-t-1)
         KS(i,n)=mean(temp(i,(n-t:n+t)))*(KK/f(n))^(1/5);
-    end    
+    end
 end
 %------------creat Ks-----------------
-%         for k=2:400            
+%         for k=2:400
 %             HAcacaTemp=[HAcaca(k,1) HAcaca(k,2) HAcaca(k,3) HAcaca(k,4);
 %                         HAcaca(matLength+k,1) HAcaca(matLength+k,2) HAcaca(matLength+k,3) HAcaca(matLength+k,4);
 %                         HAcaca(matLength*2+k,1) HAcaca(matLength*2+k,2) HAcaca(matLength*2+k,3) HAcaca(matLength*2+k,4);
@@ -107,7 +107,7 @@ end
 % KS11=Ks11;KS22=Ks22;
 % KS33=Ks33;KS44=Ks44;
 
-% 
+%
 % 暂时不平滑
 % Moving average---> smoothing results:
 % KK=max(1./f(2:matLength));
@@ -124,7 +124,7 @@ end
 
     close(msg);
 end
-    
+
     %%
  function ret=myload2(path,name,head,tail,size)
  global f
@@ -133,19 +133,26 @@ matLength=401;
     for i=1:size
         a=num2str(i);
         for j=1:size
-            file=[path '\' name '\' head a tail num2str(j) '.mat'];
-            if ~exist(file,'file')           
-                continue;%set 0
+            file=[path '\' name '\' head a tail num2str(j) '.mat'];    %HAcaca = myload2 (path,'HAcaca','HAca','ca',size);
+            if ~exist(file,'file')
+                msgbox(['找不到文件' , head a tail num2str(j) , '或路径不存在'],'错误', 'error','non-modal');
+                error(['找不到文件' , head a tail num2str(j) , '或路径不存在']);
+                %uiwait;
+                %return;
+                %continue;%set 0
+                %exit;
             end
-            temp=importdata(file);        
-            tempval=temp(:,5)+1i*temp(:,6);
+            temp=importdata(file);
+            %tempval=temp(:,5)+1i*temp(:,6);
+            tempval=temp.a4'+1i*temp.a5';
             c{i,j}=tempval;
         end
     end
     ret=cell2mat(c);
-     if ~exist('A','var')   
-     	f=temp(:,1);
+     if ~exist('A','var')    %判断名为A的变量是否存在  暂时不知 A 作用  2016-03-12-19:56
+        %f=temp(:,1);
+        f=temp.a0';
      end
-    clear temp tempval c;   
-end   
-    
+    clear temp tempval c;
+end
+

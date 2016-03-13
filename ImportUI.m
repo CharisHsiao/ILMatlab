@@ -1,4 +1,4 @@
-function varargout = ImportUI(varargin)
+function varargout = ImportUI(varargin)        %参数可变列表  用于输入输出参数        %以下部分代码是在拖控件时自动生成的
 % IMPORTUI MATLAB code for ImportUI.fig
 %      IMPORTUI, by itself, creates a new IMPORTUI or raises the existing
 %      singleton*.
@@ -26,13 +26,15 @@ function varargout = ImportUI(varargin)
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
-gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @ImportUI_OpeningFcn, ...
+
+%自动生成的结构体
+gui_State = struct('gui_Name',       mfilename, ...    %返回当前运行函数所在.m文件的文件名
+                   'gui_Singleton',  gui_Singleton, ...    %貌似为某个标记变量
+                   'gui_OpeningFcn', @ImportUI_OpeningFcn, ...  %函数句柄
                    'gui_OutputFcn',  @ImportUI_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
-if nargin && ischar(varargin{1})
+if nargin && ischar(varargin{1})    %nargin  判断输入变量个数
     gui_State.gui_Callback = str2func(varargin{1});
 end
 
@@ -68,7 +70,7 @@ clc;
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = ImportUI_OutputFcn(hObject, eventdata, handles) 
+function varargout = ImportUI_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -88,18 +90,18 @@ clear Hscaca Hscacb Hscbcb Hsoaca Hscaib Hsoaib caSize oaSize ibSize
 global Hscaca Hscacb Hscbcb Hsoaca Hscaib Hsoaib caSize oaSize ibSize
 defaultanswer={'6','3','8'};
 sizeParameter=inputdlg({'耦合点数','响应点数','激励点数'},'设定参数',1,defaultanswer);
-caSize=str2num(sizeParameter{1});
+caSize=str2num(sizeParameter{1});    %读出输入的大小并赋值
 oaSize=str2num(sizeParameter{2});
 ibSize=str2num(sizeParameter{3});
 close ImportUI
-path=uigetdir('','直接方法'); 
+path=uigetdir('','直接方法');    % 弹出选择文件夹窗口  并获取用户选择的文件夹路径
 
 if isequal(path,0)
     ImportUI
-	return
+    return    %退出所在函数的执行
 else
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
-    Hscaca = loadcbf(path,'Hscaca','ca','ca',caSize,caSize);
+    Hscaca = loadcbf(path,'Hscaca','ca','ca',caSize,caSize);      %调用函数loadcbf读入数据    function ret=loadcbf(path,name,head,tail,row,col)
     waitbar(1/6,hwait,'已载入Hscaca');
     Hscacb = loadcbf(path,'Hscacb','ca','cb',caSize,caSize);
     waitbar(2/6,hwait,'已载入Hscacb');
@@ -111,19 +113,19 @@ else
     waitbar(5/6,hwait,'已载入Hscaib');
     Hsoaib = loadcbf(path,'Hsoaib','oa','ib',oaSize,ibSize);
     waitbar(1,hwait,'已载入Hsoaib');
-    pause(0.1);
-    pre
+    pause(0.1);    %暂停0.1毫秒
+    pre     %计算开始
 close(hwait);
-clear path;  
+clear path;
 end
 DirectMainUI
 
 
 function pre
 global Hscaca Hscacb Hscbcb Hsoaca Hscaib KS caSize oaSize ibSize Hoaca Hcbib C
-msg=msgbox('计算中，请稍后...[计算完成后本对话框将自动关闭]','提示', 'help','modal');
+msg=msgbox('计算中，请稍后...[计算完成后本对话框将自动关闭]','提示', 'help','modal');    %详见消息函数msgbox    modal表示消息框为'模式'模式
 
-I=eye(caSize,caSize);
+I=eye(caSize,caSize);  %单位矩阵
 %预留临时变量空间
     HscacaTemp=zeros(caSize,caSize);
     HscacbTemp=zeros(caSize,caSize);
@@ -180,11 +182,12 @@ function indirectButton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global size KS C Hoaca Hcbib
-defaultanswer={'4'};
+%defaultanswer={'4'};
+defaultanswer={'2'};
 sizeParameter=inputdlg({'点数'},'设定参数',1,defaultanswer);
 size=str2num(sizeParameter{1});
 close ImportUI
-path=uigetdir('','间接方法'); 
+path=uigetdir('','间接方法');
 
 if isequal(path,0)
     ImportUI
@@ -192,6 +195,7 @@ if isequal(path,0)
 else
     [KS C Hoaca Hcbib]=loadcbf2(path,size);
 
-clear path;  
+clear path;
 end
 IndirectMainUI
+
