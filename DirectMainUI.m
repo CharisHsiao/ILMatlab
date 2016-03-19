@@ -88,7 +88,7 @@ global f KS
 cla;    %Çå³ýÍ¼Ïñ
 handles=guidata(gcf);
    set(handles.KSn,'String',num2str(n));
-    plot(handles.axes1,f(:),abs(KS(n,:)));
+    semilogy(handles.axes1,f(:),abs(KS(n,:)));
     xlabel('ÆµÂÊ [Hz]');ylabel('K_s [N/m]');
     title(strcat('KS ',num2str(n)));
 set(handles.gridset,'Value',0);

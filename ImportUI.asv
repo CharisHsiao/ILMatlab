@@ -96,8 +96,8 @@ ibSize=str2num(sizeParameter{3});
 %close ImportUI
 
 path=uigetdir('','直接方法');    % 弹出选择文件夹窗口  并获取用户选择的文件夹路径
-load_needed_data(path,0);   % 导入数据，0 表示使用直接逆子结构法
-  calculate(0)              %计算结果 0 表示使用直接逆子结构法
+load_needed_data(path,'直接方法');%载入使用直接方法时需要的数据
+  calculate(0)    %计算开始
 clear path;
 close ImportUI
 
@@ -117,8 +117,8 @@ sizeParameter=inputdlg({'点数'},'设定参数',1,defaultanswer);
 size=str2num(sizeParameter{1});
 
 path=uigetdir('','第一类间接方法');
-  load_needed_data(path,1)  %  导入数据,1 表示使用第一类间接逆子结构法
-   calculate(1)             % 计算结果, 1 表示使用第一类间接逆子结构法
+  load_needed_data(path,'第一类间接方法')
+   cal_Indirect_1();
     
 clear path;
 close ImportUI

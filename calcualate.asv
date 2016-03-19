@@ -1,0 +1,7 @@
+function calcualate(measure)
+%根据选用的计算方法，计算出KS、C、PC、F
+switch measure
+    case 0 
+        cal_Direct()
+    case 1
+        cal_Indirect_()
