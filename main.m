@@ -6,7 +6,7 @@ function main
 %------------splash-------------------------
 I = imread('splash.jpg');
 %input('y=');     %仅用于手动控制开始  变量y无实质作用
-time=1000;    %开始界面停留3000毫秒
+time=2000;    %开始界面停留3000毫秒
 %% Create splash screen     %使用JAVA生成开始的界面
 splashImage = im2java(I);
 win = javax.swing.JWindow;

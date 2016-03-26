@@ -70,11 +70,11 @@ set(handles.FTpanel,'Position',pan1pos)
 
 global size KSsaved KS
 KSsaved=KS;
-set(handles.SizeText,'String',['耦合\响应\激励 点数=' num2str(size) ]); 
+set(handles.SizeText,'String',['耦合\响应\激励 点数=' num2str(size) ]);
 KsDraw(1);
 
 % --- Outputs from this function are returned to the command line.
-function varargout = IndirectMainUI_OutputFcn(hObject, eventdata, handles) 
+function varargout = IndirectMainUI_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -86,6 +86,7 @@ varargout{1} = handles.output;
 function KsDraw(n)
 global f KS
 cla;
+cla reset;
 handles=guidata(gcf);
    set(handles.KSn,'String',num2str(n));
     semilogy(handles.axes1,f(:),abs(KS(n,:)));
@@ -99,6 +100,7 @@ function restart_Callback(hObject, eventdata, handles)
 % hObject    handle to restart (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+clear global;
 close IndirectMainUI
 ImportUI
 
@@ -112,6 +114,7 @@ function KSpushbutton_Callback(hObject, eventdata, handles)
 set(handles.KSpanel,'Visible','on');
 set(handles.PCpanel,'Visible','off');
 set(handles.FTpanel,'Visible','off');
+KsDraw(1);    %标签切换时即时更新
 
 % --- Executes on button press in PCpushbutton.
 function PCpushbutton_Callback(hObject, eventdata, handles)
@@ -121,6 +124,7 @@ function PCpushbutton_Callback(hObject, eventdata, handles)
 set(handles.KSpanel,'Visible','off');
 set(handles.PCpanel,'Visible','on');
 set(handles.FTpanel,'Visible','off');
+PC_plot(1,1,handles);
 
 % --- Executes on button press in FTpushbutton.
 function FTpushbutton_Callback(hObject, eventdata, handles)
@@ -130,6 +134,7 @@ function FTpushbutton_Callback(hObject, eventdata, handles)
 set(handles.KSpanel,'Visible','off');
 set(handles.PCpanel,'Visible','off');
 set(handles.FTpanel,'Visible','on');
+FT_plot(1,handles)
 
 %%      KS part
 
@@ -147,7 +152,7 @@ if b~=n
     n=0;
 end
 
-if  n>size|| n<1 
+if  n>size|| n<1
 	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(size) '的正整数']});
     set(handles.KSn,'String',KSntemp);
     n=KSntemp;
@@ -178,7 +183,7 @@ function KSnext_Callback(hObject, eventdata, handles)
 global size
 n=str2num(get(handles.KSn,'String'));
 n=n+1;
-if  n>size|| n<1 
+if  n>size|| n<1
      n=n-1;
 	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(size) '的正整数']});
 else
@@ -193,7 +198,7 @@ function KSlast_Callback(hObject, eventdata, handles)
 global size
 n=str2num(get(handles.KSn,'String'));
 n=n-1;
-if  n>size|| n<1 
+if  n>size|| n<1
      n=n+1;
 	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(size) '的正整数']});
 else
@@ -252,28 +257,30 @@ function cal_PC_Callback(hObject, eventdata, handles)
 % hObject    handle to cal_PC (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Hoaca Hcbib C size oa ib yPC;
+global Hoaca Hcbib C oa ib size yPC;
 oa=size+1;ib=size+1;
 defaultanswer={'1','1'};
 pcParameter=inputdlg({'oa','ib'},'设定路径贡献参数',1,defaultanswer);
 oa=str2num(pcParameter{1});
 ib=str2num(pcParameter{2});
+
 if oa<=size&&ib<=size  %x==fix(x) fix（x)为取整
-PC=zeros(size,1);    
-for j=1:size
-    temp=0;
-    for k=1:401
-         temp=temp+(Hoaca(oa,j,k)*C(j,j,k)*Hcbib(j,ib,k))^2;
+    PC=zeros(size,1);
+    for j=1:size
+        temp=0;
+        for k=1:401
+            temp=temp+(Hoaca(oa,j,k)*C(j,j,k)*Hcbib(j,ib,k))^2;
+        end
+        PC(j)= sqrt(temp/401);
     end
-    PC(j)= sqrt(temp/401);
-end
-cla;
-bar(abs(PC));
-yPC=abs(PC);
-xlabel('测量点');ylabel('');
-title(strcat('PC: ',num2str(ib),' TO ',num2str(oa)));
-set(handles.PCcheckbox,'Visible','on');
-set(handles.PCcheckbox,'Value',0);
+    cla;
+    bar(abs(PC));
+    yPC=abs(PC);
+    xlabel('测量点');ylabel('');
+    title(strcat('PC: ',num2str(ib),' TO ',num2str(oa)));
+
+    set(handles.PCcheckbox,'Visible','on');
+    set(handles.PCcheckbox,'Value',0);
 else
     errordlg({'输入的数值不在范围内！';['oa不大于' num2str(size) ' ib不大于' num2str(size)]});
 end
@@ -284,24 +291,24 @@ function cal_FT_Callback(hObject, eventdata, handles)
 % hObject    handle to cal_FT (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Hcbib C size size;
+global Hcbib C size;
 ib=size+1;
 defaultanswer={'1'};
 ftParameter=inputdlg('ib','设定力传递参数',1,defaultanswer);
 ib=str2num(ftParameter{1});
 if ib<=size
-FT=zeros(size,1);
-for j=1:size
-    temp=0;
-    for k=1:401
-         temp=temp+(C(j,j,k)*Hcbib(j,ib,k))^2;
+    FT=zeros(size,1);
+    for j=1:size
+        temp=0;
+        for k=1:401
+            temp=temp+(C(j,j,k)*Hcbib(j,ib,k))^2;
+        end
+        FT(j)= sqrt(temp/401);
     end
-    FT(j)= sqrt(temp/401);
-end
-cla;
-bar(abs(FT));
-xlabel('测量点');ylabel('');
-title(strcat('FT: ',num2str(ib)));
+    cla;
+    bar(abs(FT));
+    xlabel('测量点');ylabel('');
+    title(strcat('FT: ',num2str(ib)));
 else
     errordlg({'输入的数值不在范围内！';['ib不大于' num2str(size)]});
 end
@@ -346,7 +353,7 @@ if Myoa<=size&&0<Myoa
             set(handles.sliderIB,'Max',size);
             p=1/size;
             set(handles.sliderIB,'SliderStep', [p p]);
-            PC=zeros(size,1);    
+            PC=zeros(size,1);
             for j=1:size
                 temp=0;
                 for k=1:401
@@ -355,7 +362,7 @@ if Myoa<=size&&0<Myoa
                 PC(j)= sqrt(temp/401);
             end
             yPC=abs(PC);
-            bar(yPC); 
+            bar(yPC);
             xlabel('测量点');ylabel('');
             title(strcat('PC: ',num2str(Myib),' TO ',num2str(Myoa)));
     else
@@ -399,9 +406,9 @@ else
 	errordlg({'输入的数值不在范围内！';['      0<ib<=' num2str(size)]},'Error');
 	ib=round(get(handles.slider3,'Value'));
 	set(handles.ib_edit,'String',num2str(ib));
-end       
-    
-            
+end
+
+
 % --- Executes on slider movement.
 function sliderIB_Callback(hObject, eventdata, handles)
 % hObject    handle to sliderIB (see GCBO)

@@ -22,7 +22,7 @@ function varargout = ImportUI(varargin)        %参数可变列表  用于输入输出参数  
 
 % Edit the above text to modify the response to help ImportUI
 
-% Last Modified by GUIDE v2.5 19-Mar-2016 22:37:59
+% Last Modified by GUIDE v2.5 25-Mar-2016 14:13:56
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -63,6 +63,7 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
+clear global;     %清除全局变量
 clear;
 clc;
 % UIWAIT makes ImportUI wait for user response (see UIRESUME)
@@ -85,9 +86,10 @@ function directButton_Callback(hObject, eventdata, handles)
 % hObject    handle to directButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+clear global;     %清除全局变量
 clear Hscaca Hscacb Hscbcb Hsoaca Hscaib Hsoaib caSize oaSize ibSize
 
-global  caSize oaSize ibSize 
+global  caSize oaSize ibSize
 defaultanswer={'6','3','8'};
 sizeParameter=inputdlg({'耦合点数','响应点数','激励点数'},'设定参数',1,defaultanswer);
 caSize=str2num(sizeParameter{1});    %读出输入的大小并赋值
@@ -101,25 +103,114 @@ load_needed_data(path,0);   % 导入数据，0 表示使用直接逆子结构法
 clear path;
 close ImportUI
 
-DirectMainUI 
+DirectMainUI
 
-% --- Executes on button press in indirectButton.
-function indirectButton_Callback(hObject, eventdata, handles)
-% hObject    handle to indirectButton (see GCBO)
+% --- Executes on button press in indirectButton_1.
+function indirectButton_1_Callback(hObject, eventdata, handles)
+% hObject    handle to indirectButton_1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+clear global;     %清除全局变量
 clear Hsoaib size Hcaca Hcbcb Hoaca Hcbib KS C
-
 global size  KS C
 
 defaultanswer={'2'};
 sizeParameter=inputdlg({'点数'},'设定参数',1,defaultanswer);
 size=str2num(sizeParameter{1});
 
+mathod = 1;
 path=uigetdir('','第一类间接方法');
-  load_needed_data(path,1)  %  导入数据,1 表示使用第一类间接逆子结构法
-   calculate(1)             % 计算结果, 1 表示使用第一类间接逆子结构法
-    
+  load_needed_data(path,mathod)  %  导入数据,1 表示使用第一类间接逆子结构法
+   calculate(mathod)             % 计算结果, 1 表示使用第一类间接逆子结构法
+
+clear path;
+close ImportUI
+IndirectMainUI
+
+% --- Executes on button press in indirectButton_2.
+function indirectButton_2_Callback(hObject, eventdata, handles)
+% hObject    handle to indirectButton_2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clear global;     %清除全局变量
+clear Hsoaib size Hcaca Hcbcb Hoaca Hcbib KS C
+global size  KS C
+
+defaultanswer={'2'};
+sizeParameter=inputdlg({'点数'},'设定参数',1,defaultanswer);
+size=str2num(sizeParameter{1});
+
+mathod = 2;
+path=uigetdir('','第二类间接方法');
+  load_needed_data(path,mathod)  %  导入数据,1 表示使用第一类间接逆子结构法
+   calculate(mathod)             % 计算结果, 1 表示使用第一类间接逆子结构法
+
+clear path;
+close ImportUI
+IndirectMainUI
+
+% --- Executes on button press in indirectButton_3.
+function indirectButton_3_Callback(hObject, eventdata, handles)
+% hObject    handle to indirectButton_3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clear global;     %清除全局变量
+clear Hsoaib size Hcaca Hcbcb Hoaca Hcbib KS C
+global size  KS C
+
+defaultanswer={'2'};
+sizeParameter=inputdlg({'点数'},'设定参数',1,defaultanswer);
+size=str2num(sizeParameter{1});
+
+mathod = 3;
+path=uigetdir('','第三类间接方法');
+  load_needed_data(path,mathod)  %  导入数据,1 表示使用第一类间接逆子结构法
+   calculate(mathod)             % 计算结果, 1 表示使用第一类间接逆子结构法
+
+clear path;
+close ImportUI
+IndirectMainUI
+
+% --- Executes on button press in indirectButton_4.
+function indirectButton_4_Callback(hObject, eventdata, handles)
+% hObject    handle to indirectButton_4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clear global;     %清除全局变量
+clear Hsoaib size Hcaca Hcbcb Hoaca Hcbib KS C
+global size  KS C
+
+defaultanswer={'2'};
+sizeParameter=inputdlg({'点数'},'设定参数',1,defaultanswer);
+size=str2num(sizeParameter{1});
+
+mathod = 4;
+path=uigetdir('','第四类间接方法');
+  load_needed_data(path,mathod)  %  导入数据,1 表示使用第一类间接逆子结构法
+   calculate(mathod)             % 计算结果, 1 表示使用第一类间接逆子结构法
+
+clear path;
+close ImportUI
+IndirectMainUI
+
+% --- Executes on button press in indirectButton_5.
+function indirectButton_5_Callback(hObject, eventdata, handles)
+% hObject    handle to indirectButton_5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clear global;     %清除全局变量
+clear Hsoaib size Hcaca Hcbcb Hoaca Hcbib KS C
+global size  KS C
+
+defaultanswer={'2'};
+sizeParameter=inputdlg({'点数'},'设定参数',1,defaultanswer);
+size=str2num(sizeParameter{1});
+
+mathod = 5;
+path=uigetdir('','第五类间接方法');
+  load_needed_data(path,mathod)  %  导入数据,1 表示使用第一类间接逆子结构法
+   calculate(mathod)             % 计算结果, 1 表示使用第一类间接逆子结构法
+
 clear path;
 close ImportUI
 IndirectMainUI

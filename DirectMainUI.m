@@ -27,11 +27,11 @@ function varargout = DirectMainUI(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @DirectMainUI_OpeningFcn, ...
-                   'gui_OutputFcn',  @DirectMainUI_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @DirectMainUI_OpeningFcn, ...
+    'gui_OutputFcn',  @DirectMainUI_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -86,11 +86,12 @@ varargout{1} = handles.output;
 function KsDraw(n)
 global f KS
 cla;    %清除图像
+cla reset;
 handles=guidata(gcf);
-   set(handles.KSn,'String',num2str(n));
-    semilogy(handles.axes1,f(:),abs(KS(n,:)));
-    xlabel('频率 [Hz]');ylabel('K_s [N/m]');
-    title(strcat('KS ',num2str(n)));
+set(handles.KSn,'String',num2str(n));
+semilogy(handles.axes1,f(:),abs(KS(n,:)));    %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
+xlabel('频率 [Hz]');ylabel('K_s [N/m]');
+title(strcat('KS ',num2str(n)));
 set(handles.gridset,'Value',0);
 
 
@@ -99,6 +100,7 @@ function restart_Callback(hObject, eventdata, handles)
 % hObject    handle to restart (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+clear global;
 close DirectMainUI
 ImportUI
 
@@ -110,6 +112,7 @@ function KSpushbutton_Callback(hObject, eventdata, handles)
 set(handles.KSpanel,'Visible','on');
 set(handles.PCpanel,'Visible','off');
 set(handles.FTpanel,'Visible','off');
+KsDraw(1);    %标签切换时即时更新
 
 % --- Executes on button press in PCpushbutton.
 function PCpushbutton_Callback(hObject, eventdata, handles)
@@ -119,6 +122,7 @@ function PCpushbutton_Callback(hObject, eventdata, handles)
 set(handles.KSpanel,'Visible','off');
 set(handles.PCpanel,'Visible','on');
 set(handles.FTpanel,'Visible','off');
+PC_plot(1,1,handles);
 
 % --- Executes on button press in FTpushbutton.
 function FTpushbutton_Callback(hObject, eventdata, handles)
@@ -128,6 +132,7 @@ function FTpushbutton_Callback(hObject, eventdata, handles)
 set(handles.KSpanel,'Visible','off');
 set(handles.PCpanel,'Visible','off');
 set(handles.FTpanel,'Visible','on');
+FT_plot(1,handles);
 
 
 function KSn_Callback(hObject, eventdata, handles)
@@ -145,7 +150,7 @@ if b~=n
 end
 
 if  n>caSize|| n<1
-	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
+    errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
     set(handles.KSn,'String',KSntemp);
     n=KSntemp;
 else
@@ -176,8 +181,8 @@ global caSize
 n=str2num(get(handles.KSn,'String'));
 n=n+1;
 if  n>caSize|| n<1
-     n=n-1;
-	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
+    n=n-1;
+    errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
 else
     KsDraw(n);
 end
@@ -191,8 +196,8 @@ global caSize
 n=str2num(get(handles.KSn,'String'));
 n=n-1;
 if  n>caSize|| n<1
-     n=n+1;
-	errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
+    n=n+1;
+    errordlg({'输入的数值不在范围内！';['输入值应为不大于' num2str(caSize) '的正整数']});
 else
     KsDraw(n);
 end
@@ -205,7 +210,7 @@ function smooth_Callback(hObject, eventdata, handles)
 global caSize KS
 % Moving smoothing
 Kstemp=KS;
-t=round(caSize/4);
+t=round(caSize/4);    %round 四舍五入
 for i=1:caSize
     for j=1:t
         KS(i,j)=Kstemp(i,j);
@@ -231,16 +236,16 @@ global oa ib yPC caSize;
 H=findobj('tag','PCcheckbox');
 Value=get(H,'value');
 if Value==1
-cla;
-x=(1:caSize);
-% y2 = random('Poisson',1:caSize,1,caSize);
-y2=yPC;
-bar(x-.2,yPC,.4,'b');
-hold on;
-bar(x+.2,y2,.4,'r');
+    cla;
+    x=(1:caSize);
+    % y2 = random('Poisson',1:caSize,1,caSize);
+    y2=yPC;
+    bar(x-.2,yPC,.4,'b');
+    hold on;
+    bar(x+.2,y2,.4,'r');
 else
-cla;
-bar(yPC);
+    cla;
+    bar(yPC);
 end
 
 % --- Executes on button press in cal_PC.
@@ -255,21 +260,21 @@ pcParameter=inputdlg({'oa','ib'},'设定路径贡献参数',1,defaultanswer);
 oa=str2num(pcParameter{1});
 ib=str2num(pcParameter{2});
 if oa<=oaSize&&ib<=ibSize  %x==fix(x) fix（x)为取整
-PC=zeros(caSize,1);
-for j=1:caSize
-    temp=0;
-    for k=1:401
-         temp=temp+(Hoaca(oa,j,k)*C(j,j,k)*Hcbib(j,ib,k))^2;
+    PC=zeros(caSize,1);
+    for j=1:caSize
+        temp=0;
+        for k=1:401
+            temp=temp+(Hoaca(oa,j,k)*C(j,j,k)*Hcbib(j,ib,k))^2;
+        end
+        PC(j)= sqrt(temp/401);
     end
-    PC(j)= sqrt(temp/401);
-end
-cla;
-bar(abs(PC));
-yPC=abs(PC);
-xlabel('测量点');ylabel('');
-title(strcat('PC: ',num2str(ib),' TO ',num2str(oa)));
-set(handles.PCcheckbox,'Visible','on');
-set(handles.PCcheckbox,'Value',0);
+    cla;
+    bar(abs(PC));
+    yPC=abs(PC);
+    xlabel('测量点');ylabel('');
+    title(strcat('PC: ',num2str(ib),' TO ',num2str(oa)));
+    set(handles.PCcheckbox,'Visible','on');
+    set(handles.PCcheckbox,'Value',0);
 else
     errordlg({'输入的数值不在范围内！';['oa不大于' num2str(oaSize) ' ib不大于' num2str(ibSize)]});
 end
@@ -285,18 +290,18 @@ defaultanswer={'1'};
 ftParameter=inputdlg('ib','设定力传递参数',1,defaultanswer);
 ib=str2num(ftParameter{1});
 if ib<=ibSize
-FT=zeros(caSize,1);
-for j=1:caSize
-    temp=0;
-    for k=1:401
-         temp=temp+(C(j,j,k)*Hcbib(j,ib,k))^2;
+    FT=zeros(caSize,1);
+    for j=1:caSize
+        temp=0;
+        for k=1:401
+            temp=temp+(C(j,j,k)*Hcbib(j,ib,k))^2;
+        end
+        FT(j)= sqrt(temp/401);
     end
-    FT(j)= sqrt(temp/401);
-end
-cla;
-bar(abs(FT));
-xlabel('测量点');ylabel('');
-title(strcat('FT: ',num2str(ib)));
+    cla;
+    bar(abs(FT));
+    xlabel('测量点');ylabel('');
+    title(strcat('FT: ',num2str(ib)));
 else
     errordlg({'输入的数值不在范围内！';['ib不大于' num2str(ibSize)]});
 end
@@ -331,28 +336,28 @@ set(handles.PCcheckbox,'Value',0);
 set(handles.gridset,'Value',0);
 if Myoa<=oaSize&&0<Myoa
     if Myib<=ibSize&&0<Myib  %x==fix(x) fix（x)为取整
-            set(handles.oanum,'String',['oa:' num2str(Myoa)]);
-            set(handles.sliderOA,'Value',Myoa);
-            set(handles.sliderOA,'Max',oaSize);
-            p=1/oaSize;
-            set(handles.sliderOA,'SliderStep', [p p]);
-            set(handles.ibnum,'String',['ib:' num2str(Myib)]);
-            set(handles.sliderIB,'Value',Myib);
-            set(handles.sliderIB,'Max',ibSize);
-            p=1/ibSize;
-            set(handles.sliderIB,'SliderStep', [p p]);
-            PC=zeros(caSize,1);
-            for j=1:caSize
-                temp=0;
-                for k=1:401
-                     temp=temp+(Hoaca(Myoa,j,k)*C(j,j,k)*Hcbib(j,Myib,k))^2;
-                end
-                PC(j)= sqrt(temp/401);
+        set(handles.oanum,'String',['oa:' num2str(Myoa)]);
+        set(handles.sliderOA,'Value',Myoa);
+        set(handles.sliderOA,'Max',oaSize);
+        p=1/oaSize;
+        set(handles.sliderOA,'SliderStep', [p p]);
+        set(handles.ibnum,'String',['ib:' num2str(Myib)]);
+        set(handles.sliderIB,'Value',Myib);
+        set(handles.sliderIB,'Max',ibSize);
+        p=1/ibSize;
+        set(handles.sliderIB,'SliderStep', [p p]);
+        PC=zeros(caSize,1);
+        for j=1:caSize
+            temp=0;
+            for k=1:401
+                temp=temp+(Hoaca(Myoa,j,k)*C(j,j,k)*Hcbib(j,Myib,k))^2;
             end
-            yPC=abs(PC);
-            bar(yPC);
-            xlabel('测量点');ylabel('');
-            title(strcat('PC: ',num2str(Myib),' TO ',num2str(Myoa)));
+            PC(j)= sqrt(temp/401);
+        end
+        yPC=abs(PC);
+        bar(yPC);
+        xlabel('测量点');ylabel('');
+        title(strcat('PC: ',num2str(Myib),' TO ',num2str(Myoa)));
     else
         errordlg({'输入的数值不在范围内！';['      0<ib<=' num2str(ibSize)]},'Error');
         ib=round(get(handles.sliderIB,'Value'));
@@ -372,16 +377,16 @@ set(handles.FTcheckbox,'Visible','on');
 set(handles.FTcheckbox,'Value',0);
 set(handles.gridset,'Value',0);
 if Myib<=ibSize&&0<Myib  %x==fix(x) fix（x)为取整
-	set(handles.ibnum4FT,'String',['ib:' num2str(Myib)]);
-	set(handles.sliderIB4FT,'Value',Myib);
- 	set(handles.sliderIB4FT,'Max',ibSize);
- 	p=1/ibSize;
-	set(handles.sliderIB4FT,'SliderStep', [p p]);
+    set(handles.ibnum4FT,'String',['ib:' num2str(Myib)]);
+    set(handles.sliderIB4FT,'Value',Myib);
+    set(handles.sliderIB4FT,'Max',ibSize);
+    p=1/ibSize;
+    set(handles.sliderIB4FT,'SliderStep', [p p]);
     FT=zeros(caSize,1);
     for j=1:caSize
         temp=0;
         for k=1:401
-             temp=temp+(C(j,j,k)*Hcbib(j,Myib,k))^2;
+            temp=temp+(C(j,j,k)*Hcbib(j,Myib,k))^2;
         end
         FT(j)= sqrt(temp/401);
     end
@@ -391,9 +396,9 @@ if Myib<=ibSize&&0<Myib  %x==fix(x) fix（x)为取整
     xlabel('测量点');ylabel('');
     title(strcat('FT:  ',num2str(Myib)));
 else
-	errordlg({'输入的数值不在范围内！';['      0<ib<=' num2str(ibSize)]},'Error');
-	ib=round(get(handles.slider3,'Value'));
-	set(handles.ib_edit,'String',num2str(ib));
+    errordlg({'输入的数值不在范围内！';['      0<ib<=' num2str(ibSize)]},'Error');
+    ib=round(get(handles.slider3,'Value'));
+    set(handles.ib_edit,'String',num2str(ib));
 end
 
 
@@ -556,16 +561,16 @@ global yFT caSize;
 H=findobj('tag','FTcheckbox');
 Value=get(H,'value');
 if Value==1
-cla;
-x=(1:caSize);
-% y2 = random('Poisson',1:caSize,1,caSize);
-y2=yFT/2;
-bar(x-.2,yFT,.4,'b');
-hold on;
-bar(x+.2,y2,.4,'r');
+    cla;
+    x=(1:caSize);
+    % y2 = random('Poisson',1:caSize,1,caSize);
+    y2=yFT/2;
+    bar(x-.2,yFT,.4,'b');
+    hold on;
+    bar(x+.2,y2,.4,'r');
 else
-cla;
-bar(yFT);
+    cla;
+    bar(yFT);
 end
 % Hint: get(hObject,'Value') returns toggle state of FTcheckbox
 
@@ -576,8 +581,8 @@ function quit_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 selection = questdlg(['退出程序?'],...
-                     ['退出 ' ],...
-                     '是','否','是');
+    ['退出 ' ],...
+    '是','否','是');
 if strcmp(selection,'否')
     return;
 end
