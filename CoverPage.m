@@ -22,7 +22,7 @@ function varargout = CoverPage(varargin)
 
 % Edit the above text to modify the response to help CoverPage
 
-% Last Modified by GUIDE v2.5 28-Mar-2016 10:32:49
+% Last Modified by GUIDE v2.5 28-Mar-2016 18:09:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -57,15 +57,21 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
-set(handles.KSlastpushbutton,'Enable','inactive');
-set(handles.KSnextpushbutton,'Enable','inactive');
-set(handles.PCiblastpushbutton,'Enable','inactive');
-set(handles.PCibnextpushbutton,'Enable','inactive');
-set(handles.PCoalastpushbutton,'Enable','inactive');
-set(handles.PCoanextpushbutton,'Enable','inactive');
-set(handles.FTiblastpushbutton,'Enable','inactive');
-set(handles.FTibnextpushbutton,'Enable','inactive');
-%set(Loadsample,'Enble','off');
+set(handles.KSlastpushbutton,'Enable',inactive);
+set(handles.KSnextpushbutton,'Enable',inactive);
+set(handles.PCiblastpushbutton,'Enable',inactive);
+set(handles.PCibnextpushbutton,'Enable',inactive);
+set(handles.PCoalastpushbutton,'Enable',inactive);
+set(handles.PCoanextpushbutton,'Enable',inactive);
+set(handles.FTiblastpushbutton,'Enable',inactive);
+set(handles.FTibnextpushbutton,'Enable',inactive);
+set(handles.Loadsample,'Enble','off');
+set(handles.Comparecheckbox,'Value',0);
+set(handles.Comparecheckbox,'Visible',0);
+set(handles.gridset,'Value',0);
+global LoadSflag ;
+LoadSflag = 0;
+
 
 % UIWAIT makes CoverPage wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -88,7 +94,7 @@ function Directpushbutton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 clear g_1 method 
-global g_1,ma]ethod 
+global g_1,method 
 method  = 0;
 if(~getSize(g_1,method))
     %¸ø³öÌáÊ¾ÐÅÏ¢
@@ -314,7 +320,7 @@ if n==1
     set(handles.KSlastpushbutton,'Enable','inactive');
 end
 
-if((method == 0 &&n<g.caSize)||(method ~= 0&&n<g.size))
+if((method == 0 &&n<g_1.caSize)||(method ~= 0&&n<g_1.size))
      set(handles.KSnextpushbutton,'Enable',on);
 end
 % --- Executes on button press in KSnextpushbutton.
@@ -324,7 +330,7 @@ function KSnextpushbutton_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global Loadsflag g_1 s method 
 n=str2num(get(handles.KSnedit,'String'));
-if((method == 0 &&n<g.caSize)||(method ~= 0&&n<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
+if((method == 0 &&n<g_1.caSize)||(method ~= 0&&n<g_1.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
     n=n+1;
     set(handles.KSnedit,'String',num2str(n));
     if(~Loadsflag)
@@ -334,7 +340,7 @@ if((method == 0 &&n<g.caSize)||(method ~= 0&&n<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµ
     end    
 end
 
-if (method == 0 &&n==g.caSize)||(method ~= 0&&n==g.size)
+if (method == 0 &&n==g_1.caSize)||(method ~= 0&&n==g_1.size)
     set(handles.KSnextpushbutton,'Enable',inactive);
 end
 
@@ -349,6 +355,54 @@ function Smoothpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Smoothpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global g_1 s LoadSflag 
+global KSgSave KSsSave
+KSgSave = g.KS;
+KSsSave = s.KS;
+
+n = str2num(get(handles.KSnedit,'String'));
+KStemp = g_1.KS;
+
+if(mathod == 0)
+    t = round(g_1.caSize/4);
+    Sizetemp = g_1.caSize;
+else
+        t = round(g_1.Size/4);
+        Sizetemp = g_1.Size;
+end 
+
+     for i = 1:Sizetemp
+         for j = 1:t
+             g_1.KS(i,j)=KStemp(i,j);
+         end
+         for j=(t+1):(length(g_1.f(:))-t-1)
+                  g_1.KS(i,j)=mean(KStemp(i,j-t:j+t));
+         end
+         for j=401-t:401
+            g_1.KS(i,j)=KStemp(i,j);
+         end
+     end
+     if(LoadSflag)%Èç¹ûÑùÆ·Êý¾ÝÒ²¼ÓÔØÁË£¬ÑùÆ·Êý¾ÝµÄÏßÍ¬²½Æ½»¬
+         for i = 1:Sizetemp
+            for j = 1:t
+             s.KS(i,j)=Kstemp(i,j);
+            end
+            for j=(t+1):(length(g_1.f(:))-t-1)
+                  s.KS(i,j)=mean(KStemp(i,j-t:j+t));
+            end
+            for j=401-t:401
+            s.KS(i,j)=KStemp(i,j);
+             end
+         end
+     end
+     if ~LoadSflag
+         KSDraw(g_1,n);
+     else
+         KSDraw(g_1,s,n);
+     end
+     
+     
+
 
 
 % --- Executes on button press in KSrecoverpushbutton.
@@ -356,6 +410,15 @@ function KSrecoverpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to KSrecoverpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global KSsSave KSgSave g_1 s
+g_1.KS = KSsSave;
+s.KS = KSsSave;
+n = str2num(handles.KSnedit,'String');
+if(~LoadsFlag)
+    KSDraw(g_1,n);
+else
+    KSDraw(g_1,s,n);
+end
 
 
 
@@ -443,7 +506,7 @@ end
 if ib== 1
     set(handles.PCiblastpushbutton,'Enable',inactive);
 end
-if (method == 0 &&ib<g.ibSize)||(method ~= 0&&ib<g.size)
+if (method == 0 &&ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size)
     set(handles.PCibnextpushbutton,'Enable',inactive);
 end
 
@@ -458,7 +521,7 @@ function PCibnextpushbutton_Callback(hObject, eventdata, handles)
 global Loadsflag g_1 s method 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
-if((method == 0 && ib<g.ibSize)||(method ~= 0&&ib<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
+if((method == 0 && ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
     ib=ib+1;
     set(handles.PCibedit,'String',num2str(ib));
     if(~Loadsflag)
@@ -468,7 +531,7 @@ if((method == 0 && ib<g.ibSize)||(method ~= 0&&ib<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍK
     end    
 end
 
-if (method == 0 &&ib==g.ibSize)||(method ~= 0&&ib==g.size)
+if (method == 0 &&ib==g_1.ibSize)||(method ~= 0&&ib==g_1.size)
     set(handles.PCibnextpushbutton,'Enable',inactive);
 end
 
@@ -562,7 +625,7 @@ end
 if oa== 1
     set(handles.PCoalastpushbutton,'Enable',inactive);
 end
-if (method == 0 &&oa<g.oaSize)||(method ~= 0&&oa<g.size)
+if (method == 0 &&oa<g_1.oaSize)||(method ~= 0&&oa<g_1.size)
     set(handles.PCoanextpushbutton,'Enable',inactive);
 end
 
@@ -574,7 +637,7 @@ function PCoanextpushbutton_Callback(hObject, eventdata, handles)
 global Loadsflag g_1 s method 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
-if((method == 0 && oa<g.oaSize)||(method ~= 0&&oa<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍ×î´óÖµ
+if((method == 0 && oa<g_1.oaSize)||(method ~= 0&&oa<g_1.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍ×î´óÖµ
     oa=oa+1;
     set(handles.PCoaedit,'String',num2str(oa));
     if(~Loadsflag)
@@ -584,7 +647,7 @@ if((method == 0 && oa<g.oaSize)||(method ~= 0&&oa<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍ×
     end    
 end
 
-if (method == 0 &&oa==g.oaSize)||(method ~= 0&&oa==g.size)
+if (method == 0 &&oa==g_1.oaSize)||(method ~= 0&&oa==g_1.size)
     set(handles.PCoanextpushbutton,'Enable',inactive);
 end
 
@@ -675,7 +738,7 @@ end
 if ib == 1
     set(handles.FTiblastpushbutton,'Enable',inactive);
 end
-if (method == 0 &&ib<g.ibSize)||(method ~= 0&&ib<g.size)
+if (method == 0 &&ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size)
     set(handles.FTibnextpushbutton,'Enable',inactive);
 end
 
@@ -686,7 +749,7 @@ function FTibnextpushbutton_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global Loadsflag g_1 s method 
 ib=str2num(get(handles.FTibedit,'String'));
-if((method == 0 && ib<g.ibSize)||(method ~= 0&&ib<g.size))
+if((method == 0 && ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size))
     ib=ib+1;
     set(handles.FTibedit,'String',num2str(ib));
     if(~Loadsflag)
@@ -696,7 +759,7 @@ if((method == 0 && ib<g.ibSize)||(method ~= 0&&ib<g.size))
     end    
 end
 
-if (method == 0 &&ib==g.ibSize)||(method ~= 0&&ib==g.size)
+if (method == 0 &&ib==g_1.ibSize)||(method ~= 0&&ib==g_1.size)
     set(handles.FTibnextpushbutton,'Enable',inactive);
 end
 
@@ -721,6 +784,31 @@ function Loadsample_Callback(hObject, eventdata, handles)
 % hObject    handle to Loadsample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global method s g_1 PRpath 
+if(method == 0)
+    s.caSize = g_1.caSize;
+    s.ibSize = g_1.ibSize;
+    s.oaSize = g_1.oaSize;
+else
+    s.Size = g_1.Size;
+end
+if(load_needed_data(PRpath,method,s)&&calculate(PRpath,method,s))
+%ÏÔÊ¾ËùÓÐ¶Ô±ÈµÄÍ¼ÏñºÍÑ¡ÔñÊÇ·ñÏÔÊ¾¶Ô±ÈµÄ¸´Ñ¡¿ò
+KSn = str2num(get(handles.KSnedit,'String'));
+PCib = str2num(get(handles.PCibedit,'String'));
+PCoa = str2num(get(handles.PCoaedit,'String'));
+FTib = str2num(get(handles.FTibedit,'String'));
+KSDraw(g_1,s,KSn);
+PCDraw(g_1,s,PCib,PCoa);
+FTDraw(g_1,s,FTib);
+set(handles.Comparecheckbox,'Visible',on);
+set(handles.Comparecheckbox,'Value',1);
+else
+    clear s;
+end
+    
+
+
 
 
 % --------------------------------------------------------------------
@@ -782,7 +870,7 @@ set(handles.PCoanextpushbutton,'Enable',on);
 set(handles.FTiblastpushbutton,'Enable',inactive);
 set(handles.FTibnextpushbutton,'Enable',on);
 
-if (method == 0 &&n==g.caSize)||(method ~= 0&&n==g.size)
+if (method == 0 &&n==g_1.caSize)||(method ~= 0&&n==g.size)
     set(handles.KSnextpushbutton,'Enable',inactive);
 end  
 if (method == 0 &&n==g.ibSize)||(method ~= 0&&n==g.size)
@@ -839,6 +927,7 @@ end
 function FTDraw(g,s,ib)
 %Ç°ÖÃÌõ¼þ ibµÄÖµÕýÈ·,g,sµÄÊý¾ÝÒÑ¾­È«²¿¼ÓÔØ¼ÆËãÍê
 %FTÃæ°åÓÐ¶Ô±ÈµÄ
+
 handles=guidata(gcf);
     cla(handles.FTaxes);
     xlabel(handles.FTaxes,'²âÁ¿µã');
@@ -853,21 +942,6 @@ handles=guidata(gcf);
             bar(handles.FTaxes,x-.2,abs(s.FT(:,ib)),.4,'r');
     end
     
-            
-
-
-% --- Executes on button press in PCoalastpushbutton.
-function PCoalastpushbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to PCoalastpushbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-% --- Executes on button press in PCoanextpushbutton.
-function PCoanextpushbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to PCoanextpushbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 
 % --------------------------------------------------------------------
@@ -938,5 +1012,32 @@ function gridset_Callback(hObject, eventdata, handles)
 % hObject    handle to gridset (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+if(get(handles.gridset,'Value') == 1)
+    grid on
+else grid off
+end
 % Hint: get(hObject,'Value') returns toggle state of gridset
+
+
+% --- Executes on button press in Comparecheckbox.
+function Comparecheckbox_Callback(hObject, eventdata, handles)
+% hObject    handle to Comparecheckbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global g_1,s
+    KSn = str2num(get(handles.KSnedit,'String'));
+    PCib = str2num(get(handles.PCibedit,'String'));
+    PCoa = str2num(get(handles.PCoaedit,'String'));
+    FTib = str2num(get(handles.FTibedit,'String'));
+if(isequal(get(handles.Comparecheckbox,'Value'),1))
+    KSDraw(g_1,s,KSn);
+    PCDraw(g_1,s,PCib,PCoa);
+    FTDraw(g_1,s,FTib);
+else
+     KSDraw(g_1,KSn);
+     PCDraw(g_1,PCib,PCoa);
+     FTDraw(g_1,FTib);
+end
+
+    
+% Hint: get(hObject,'Value') returns toggle state of Comparecheckbox
