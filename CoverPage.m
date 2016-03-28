@@ -87,8 +87,8 @@ function Directpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Directpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 mathod 
-global g_1,mathod 
+clear g_1 method 
+global g_1,ma]ethod 
 method  = 0;
 if(~getSize(g_1,method))
     %¸ø³öÌáÊ¾ÐÅÏ¢
@@ -96,7 +96,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ÐÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,mathod,g_1)&&calculate(PRpath,method,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,method,g_1))
         %ÏÔÊ¾Èý¸öÍ¼±í»¹ÓÐÏà¹Ø¿Ø¼þ 
         displayWhole(g_1);
 else
@@ -112,8 +112,8 @@ function Indirectpushbutton_1_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 mathod 
-global g_1,mathod 
+clear g_1 method 
+global g_1,method 
 method  = 1;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ÐÅÏ¢
@@ -121,7 +121,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ÐÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,mathod,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
         %ÏÔÊ¾Èý¸öÍ¼±í»¹ÓÐÏà¹Ø¿Ø¼þ     
         displayWhole(g_1);
 else
@@ -137,8 +137,8 @@ function Indirectpushbutton_2_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 mathod 
-global g_1,mathod 
+clear g_1 method 
+global g_1,method 
 method  = 2;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ÐÅÏ¢
@@ -146,7 +146,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ÐÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,mathod,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
         %ÏÔÊ¾Èý¸öÍ¼±í»¹ÓÐÏà¹Ø¿Ø¼þ    
         displayWhole(g_1);
 else
@@ -162,8 +162,8 @@ function Indirectpushbutton_3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of Indirectpushbutton_3
-clear g_1 mathod 
-global g_1,mathod 
+clear g_1 method 
+global g_1,method 
 method  = 3;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ÐÅÏ¢
@@ -171,7 +171,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ÐÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,mathod,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
         %ÏÔÊ¾Èý¸öÍ¼±í»¹ÓÐÏà¹Ø¿Ø¼þ  
         displayWhole(g_1);
 else
@@ -185,8 +185,8 @@ function Indirectpushbutton_4_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 mathod 
-global g_1,mathod 
+clear g_1 method 
+global g_1,method 
 method  = 4;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ÐÅÏ¢
@@ -194,7 +194,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ÐÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,mathod,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
         %ÏÔÊ¾Èý¸öÍ¼±í»¹ÓÐÏà¹Ø¿Ø¼þ    
         displayWhole(g_1);
 else
@@ -211,8 +211,8 @@ function Indirectpushbutton_5_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % --- Executes on button press in Indirectpushbutton_4.
-clear g_1 mathod 
-global g_1,mathod 
+clear g_1 method 
+global g_1,method 
 method  = 5;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ÐÅÏ¢
@@ -220,7 +220,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ÐÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,mathod,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
         %ÏÔÊ¾Èý¸öÍ¼±í»¹ÓÐÏà¹Ø¿Ø¼þ  
         displayWhole(g_1);
 else
@@ -236,6 +236,46 @@ function KSnedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of KSnedit as text
 %        str2double(get(hObject,'String')) returns contents of KSnedit as a double
+global method Loadsflag g_1 s 
+str = get(handles.KSnedit,'String');
+len = length(str);
+s = [];
+flag = 1;
+%ÅÌËãÊäÈëµÄ×Ö·û´®µÄºÏ·¨ÐÔ £¨Ö»ÄÜÊäÈëÕýÕûÊý£©
+for i = 1:len
+    if str(i)>'9'||str(i)<'0'
+           flag = 0;
+           break;
+     end      
+end
+
+if(~flag)
+    %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈë²»ºÏ·¨
+    errordlg({'ÊäÈë²»ºÏ·¨£¡';'Ö»ÄÜÊäÈë·ÇÁãÕýÕûÊý£¬²»ÄÜ°üº¬¿Õ¸ñÒÔ¼°ÆäËû×Ö·û'});
+else
+    n = str2num(str);
+    if(method == 0&&n<=g_1.caSzie )||(method ~=0 && n <= g_1.Size)||n~=0
+        if(~Loadsflag)
+        KSDraw(g_1,n);
+        else
+            KSDraw(g_1,s,n);
+        end
+    else
+          %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈëµÄÖµ³¬³ö·¶Î§
+          errordlg({'ÊäÈëµÄÖµ³¬³ö·¶Î§';});
+    end 
+    
+    if(n ==1 )
+        set(handles.KSlastpushbutton,'Enable',inactive);
+    else
+        set(handles.KSlastpushbutton,'Enable',on);
+    end
+    if(method == 0&& n==g_1.caSzie )||(method ~=0 && n == g_1.Size)
+        set(handles.KSnextpushbutton,'Enable',inactive);
+    else
+        set(handles.KSnextpushbutton,'Enable',on);
+    end
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -250,6 +290,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
+   
+    
+        
 
 % --- Executes on button press in KSlastpushbutton.
 function KSlastpushbutton_Callback(hObject, eventdata, handles)
@@ -271,7 +314,7 @@ if n==1
     set(handles.KSlastpushbutton,'Enable','inactive');
 end
 
-if((mathod == 0 &&n<g.caSize)||(mathod ~= 0&&n<g.size))
+if((method == 0 &&n<g.caSize)||(method ~= 0&&n<g.size))
      set(handles.KSnextpushbutton,'Enable',on);
 end
 % --- Executes on button press in KSnextpushbutton.
@@ -279,9 +322,9 @@ function KSnextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to KSnextpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Loadsflag g_1 s mathod 
+global Loadsflag g_1 s method 
 n=str2num(get(handles.KSnedit,'String'));
-if((mathod == 0 &&n<g.caSize)||(mathod ~= 0&&n<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
+if((method == 0 &&n<g.caSize)||(method ~= 0&&n<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
     n=n+1;
     set(handles.KSnedit,'String',num2str(n));
     if(~Loadsflag)
@@ -291,7 +334,7 @@ if((mathod == 0 &&n<g.caSize)||(mathod ~= 0&&n<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµ
     end    
 end
 
-if (mathod == 0 &&n==g.caSize)||(mathod ~= 0&&n==g.size)
+if (method == 0 &&n==g.caSize)||(method ~= 0&&n==g.size)
     set(handles.KSnextpushbutton,'Enable',inactive);
 end
 
@@ -323,6 +366,47 @@ function PCibedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of PCibedit as text
 %        str2double(get(hObject,'String')) returns contents of PCibedit as a double
+global method Loadsflag g_1 s 
+str = get(handles.PCibedit,'String');
+len = length(str);
+s = [];
+flag = 1;
+%ÅÌËãÊäÈëµÄ×Ö·û´®µÄºÏ·¨ÐÔ £¨Ö»ÄÜÊäÈëÕýÕûÊý£©
+for i = 1:len
+    if str(i)>'9'||str(i)<'0'
+           flag = 0;
+           break;
+     end      
+end
+
+if(~flag)
+    %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈë²»ºÏ·¨
+    errordlg({'ÊäÈë²»ºÏ·¨£¡';'Ö»ÄÜÊäÈë·ÇÁãÕýÕûÊý,²»ÄÜ°üº¬¿Õ¸ñÒÔ¼°ÆäËû×Ö·û'});
+else
+    ib = str2num(str);
+    oa = str2num(get(handles.PCoaedit,'String'));
+    if(method == 0&&ib<=g_1.ibSzie )||(method ~=0 && ib <= g_1.Size)|| ib~=0
+        if(~Loadsflag)
+        PCDraw(g_1,ib,oa);
+        else
+            PCDraw(g_1,s,ib,oa);
+        end
+    else
+          %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈëµÄÖµ³¬³ö·¶Î§
+          errordlg({'ÊäÈëµÄÖµ³¬³ö·¶Î§';});
+    end 
+    
+    if(ib ==1 )
+        set(handles.PCiblastpushbutton,'Enable',inactive);
+    else
+        set(handles.PCiblastpushbutton,'Enable',on);
+    end
+    if(method == 0&& ib ==g_1.ibSzie )||(method ~=0 && ib == g_1.Size)
+        set(handles.PCibnextpushbutton,'Enable',inactive);
+    else
+        set(handles.PCibnextpushbutton,'Enable',on);
+    end
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -343,7 +427,7 @@ function PCiblastpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCiblastpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Loadsflag g_1 s mathod 
+global Loadsflag g_1 s method 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
 if(ib>=2)
@@ -359,7 +443,7 @@ end
 if ib== 1
     set(handles.PCiblastpushbutton,'Enable',inactive);
 end
-if (mathod == 0 &&ib<g.ibSize)||(mathod ~= 0&&ib<g.size)
+if (method == 0 &&ib<g.ibSize)||(method ~= 0&&ib<g.size)
     set(handles.PCibnextpushbutton,'Enable',inactive);
 end
 
@@ -371,10 +455,10 @@ function PCibnextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCibnextpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Loadsflag g_1 s mathod 
+global Loadsflag g_1 s method 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
-if((mathod == 0 && ib<g.ibSize)||(mathod ~= 0&&ib<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
+if((method == 0 && ib<g.ibSize)||(method ~= 0&&ib<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍKSnµÄ×î´óÖµ
     ib=ib+1;
     set(handles.PCibedit,'String',num2str(ib));
     if(~Loadsflag)
@@ -384,7 +468,7 @@ if((mathod == 0 && ib<g.ibSize)||(mathod ~= 0&&ib<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍK
     end    
 end
 
-if (mathod == 0 &&ib==g.ibSize)||(mathod ~= 0&&ib==g.size)
+if (method == 0 &&ib==g.ibSize)||(method ~= 0&&ib==g.size)
     set(handles.PCibnextpushbutton,'Enable',inactive);
 end
 
@@ -400,6 +484,48 @@ function PCoaedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of PCoaedit as text
 %        str2double(get(hObject,'String')) returns contents of PCoaedit as a double
+global method Loadsflag g_1 s 
+str = get(handles.Poabedit,'String');
+len = length(str);
+s = [];
+flag = 1;
+%ÅÌËãÊäÈëµÄ×Ö·û´®µÄºÏ·¨ÐÔ £¨Ö»ÄÜÊäÈëÕýÕûÊý£©
+for i = 1:len
+    if str(i)>'9'||str(i)<'0'  %Èç¹û²»ÊÇÊý×Ö
+           flag = 0;
+           break;
+     end      
+end
+
+if(~flag)
+    %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈë²»ºÏ·¨
+    errordlg({'ÊäÈë²»ºÏ·¨£¡';'Ö»ÄÜÊäÈë·ÇÁãÕýÕûÊý,²»ÄÜ°üº¬¿Õ¸ñÒÔ¼°ÆäËû×Ö·û'});
+else
+    oa = str2num(str);
+    ib = str2num(get(handles.PCibedit,'String'));
+    if(method == 0&&oa<=g_1.ibSzie )||(method ~=0 && oa <= g_1.Size)|| oa~=0
+        if(~Loadsflag)
+            PCDraw(g_1,ib,oa);
+        else
+            PCDraw(g_1,s,ib,oa);
+        end
+    else
+          %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈëµÄÖµ³¬³ö·¶Î§
+          errordlg({'ÊäÈëµÄÖµ³¬³ö·¶Î§';});
+    end 
+    
+    if(oa ==1 )
+        set(handles.PCoalastpushbutton,'Enable',inactive);
+    else
+        set(handles.PCoalastpushbutton,'Enable',on);
+    end
+    if(method == 0&& oa ==g_1.oaSzie )||(method ~=0 && oa == g_1.Size)
+        set(handles.PCoanextpushbutton,'Enable',inactive);
+    else
+        set(handles.PCoanextpushbutton,'Enable',on);
+    end
+end
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -420,7 +546,7 @@ function PCoalastpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCoalastpushbutton16 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Loadsflag g_1 s mathod 
+global Loadsflag g_1 s method 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
 if(oa>=2)
@@ -436,7 +562,7 @@ end
 if oa== 1
     set(handles.PCoalastpushbutton,'Enable',inactive);
 end
-if (mathod == 0 &&oa<g.oaSize)||(mathod ~= 0&&oa<g.size)
+if (method == 0 &&oa<g.oaSize)||(method ~= 0&&oa<g.size)
     set(handles.PCoanextpushbutton,'Enable',inactive);
 end
 
@@ -445,10 +571,10 @@ function PCoanextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCoanextpushbutton17 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Loadsflag g_1 s mathod 
+global Loadsflag g_1 s method 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
-if((mathod == 0 && oa<g.oaSize)||(mathod ~= 0&&oa<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍ×î´óÖµ
+if((method == 0 && oa<g.oaSize)||(method ~= 0&&oa<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍ×î´óÖµ
     oa=oa+1;
     set(handles.PCoaedit,'String',num2str(oa));
     if(~Loadsflag)
@@ -458,7 +584,7 @@ if((mathod == 0 && oa<g.oaSize)||(mathod ~= 0&&oa<g.size))%ÅÐ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍ×
     end    
 end
 
-if (mathod == 0 &&oa==g.oaSize)||(mathod ~= 0&&oa==g.size)
+if (method == 0 &&oa==g.oaSize)||(method ~= 0&&oa==g.size)
     set(handles.PCoanextpushbutton,'Enable',inactive);
 end
 
@@ -474,6 +600,46 @@ function FTibedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of FTibedit as text
 %        str2double(get(hObject,'String')) returns contents of FTibedit as a double
+global method Loadsflag g_1 s 
+str = get(handles.FTibedit,'String');
+len = length(str);
+s = [];
+flag = 1;
+%ÅÌËãÊäÈëµÄ×Ö·û´®µÄºÏ·¨ÐÔ £¨Ö»ÄÜÊäÈëÕýÕûÊý£©
+for i = 1:len
+    if str(i)>'9'||str(i)<'0'
+           flag = 0;
+           break;
+     end      
+end
+
+if(~flag)
+    %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈë²»ºÏ·¨
+    errordlg({'ÊäÈë²»ºÏ·¨£¡';'Ö»ÄÜÊäÈë·ÇÁãÕýÕûÊý,²»ÄÜ°üº¬¿Õ¸ñÒÔ¼°ÆäËû×Ö·û'});
+else   
+    ib = str2num(get(handles.FTibedit,'String'));
+    if(method == 0&&ib<=g_1.ibSzie )||(method ~=0 && ib <= g_1.Size)|| ib~=0
+        if(~Loadsflag)
+        FTDraw(g_1,ib);
+        else
+            FTDraw(g_1,s,ib);
+        end
+    else
+          %ÏÔÊ¾ÌáÊ¾ÐÅÏ¢£ºÊäÈëµÄÖµ³¬³ö·¶Î§
+          errordlg({'ÊäÈëµÄÖµ³¬³ö·¶Î§';});
+    end 
+    
+    if(ib ==1 )
+        set(handles.FTiblastpushbutton,'Enable',inactive);
+    else
+        set(handles.FTiblastpushbutton,'Enable',on);
+    end
+    if(method == 0&& ib ==g_1.ibSzie )||(method ~=0 && ib == g_1.Size)
+        set(handles.FTibnextpushbutton,'Enable',inactive);
+    else
+        set(handles.FTibnextpushbutton,'Enable',on);
+    end
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -494,7 +660,7 @@ function FTiblastpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to FTiblastpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Loadsflag g_1 s mathod 
+global Loadsflag g_1 s method 
 ib=str2num(get(handles.FTibedit,'String'));
 if(ib>=2)
     ib=ib-1;
@@ -509,7 +675,7 @@ end
 if ib == 1
     set(handles.FTiblastpushbutton,'Enable',inactive);
 end
-if (mathod == 0 &&ib<g.ibSize)||(mathod ~= 0&&ib<g.size)
+if (method == 0 &&ib<g.ibSize)||(method ~= 0&&ib<g.size)
     set(handles.FTibnextpushbutton,'Enable',inactive);
 end
 
@@ -518,9 +684,9 @@ function FTibnextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to FTibnextpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global Loadsflag g_1 s mathod 
+global Loadsflag g_1 s method 
 ib=str2num(get(handles.FTibedit,'String'));
-if((mathod == 0 && ib<g.ibSize)||(mathod ~= 0&&ib<g.size))
+if((method == 0 && ib<g.ibSize)||(method ~= 0&&ib<g.size))
     ib=ib+1;
     set(handles.FTibedit,'String',num2str(ib));
     if(~Loadsflag)
@@ -530,7 +696,7 @@ if((mathod == 0 && ib<g.ibSize)||(mathod ~= 0&&ib<g.size))
     end    
 end
 
-if (mathod == 0 &&ib==g.ibSize)||(mathod ~= 0&&ib==g.size)
+if (method == 0 &&ib==g.ibSize)||(method ~= 0&&ib==g.size)
     set(handles.FTibnextpushbutton,'Enable',inactive);
 end
 
@@ -595,15 +761,11 @@ function About_Help_Callback(hObject, eventdata, handles)
 
 
 
-
-
-
-
 function displayWhole(g)
 %UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
+%Detailed explanation goes here
 %Ç°ÖÃÌõ¼þ£º²úÆ·Àà¶ÔÏógµÄÊý¾Ý¶¼ÒÑ¾­¼ÓÔØ
-global mathod 
+global method 
 set(handles.KSnedit,'String','1');
 set(handles.PCoaedit,'String','1');
 set(handles.PCibedit,'String','1');
@@ -620,16 +782,17 @@ set(handles.PCoanextpushbutton,'Enable',on);
 set(handles.FTiblastpushbutton,'Enable',inactive);
 set(handles.FTibnextpushbutton,'Enable',on);
 
-if (mathod == 0 &&n==g.caSize)||(mathod ~= 0&&n==g.size)
+if (method == 0 &&n==g.caSize)||(method ~= 0&&n==g.size)
     set(handles.KSnextpushbutton,'Enable',inactive);
 end  
-if (mathod == 0 &&n==g.ibSize)||(mathod ~= 0&&n==g.size)
+if (method == 0 &&n==g.ibSize)||(method ~= 0&&n==g.size)
     set(handles.PCibnextpushbutton,'Enable',inactive);
 end 
-if (mathod == 0 &&n==g.oaSize)||(mathod ~= 0&&n==g.size)
+
+if (method == 0 &&n==g.oaSize)||(method ~= 0&&n==g.size)
     set(handles.PCoanextpushbutton,'Enable',inactive);
 end 
-if (mathod == 0 &&n==g.ibSize)||(mathod ~= 0&&n==g.size)
+if (method == 0 &&n==g.ibSize)||(method ~= 0&&n==g.size)
     set(handles.FTibnextpushbutton,'Enable',inactive);
 end 
 
@@ -671,9 +834,7 @@ switch nargin
         hold on;
         bar(handles.PCaxes,x+.2,s.PC(i,j),.4,'r');
 end
-   
-
-
+  
 
 function FTDraw(g,s,ib)
 %Ç°ÖÃÌõ¼þ ibµÄÖµÕýÈ·,g,sµÄÊý¾ÝÒÑ¾­È«²¿¼ÓÔØ¼ÆËãÍê
