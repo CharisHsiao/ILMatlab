@@ -57,20 +57,26 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
-set(handles.KSlastpushbutton,'Enable',inactive);
-set(handles.KSnextpushbutton,'Enable',inactive);
-set(handles.PCiblastpushbutton,'Enable',inactive);
-set(handles.PCibnextpushbutton,'Enable',inactive);
-set(handles.PCoalastpushbutton,'Enable',inactive);
-set(handles.PCoanextpushbutton,'Enable',inactive);
-set(handles.FTiblastpushbutton,'Enable',inactive);
-set(handles.FTibnextpushbutton,'Enable',inactive);
-set(handles.Loadsample,'Enble','off');
+set(handles.KSlastpushbutton,'Enable','inactive');
+set(handles.KSnextpushbutton,'Enable','inactive');
+set(handles.PCiblastpushbutton,'Enable','inactive');
+set(handles.PCibnextpushbutton,'Enable','inactive');
+set(handles.PCoalastpushbutton,'Enable','inactive');
+set(handles.PCoanextpushbutton,'Enable','inactive');
+set(handles.FTiblastpushbutton,'Enable','inactive');
+set(handles.FTibnextpushbutton,'Enable','inactive');
+%set(handles.Loadsample,'Enble','off');
 set(handles.Comparecheckbox,'Value',0);
-set(handles.Comparecheckbox,'Visible',0);
+set(handles.Comparecheckbox,'Visible','off');
 set(handles.gridset,'Value',0);
 global LoadSflag ;
 LoadSflag = 0;
+global g_1 s PRpath ALpath method
+g_1 = Project();
+s = Project();
+PRpath = 'F:\git\Matlab+\ILMatlab\AssemblyLine_1\General';
+ALpath = 'F:\git\Matlab+\ILMatlab\AssemblyLine_1';
+method = 0;
 
 
 % UIWAIT makes CoverPage wait for user response (see UIRESUME)
@@ -93,8 +99,8 @@ function Directpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Directpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 method 
-global g_1,method 
+clear g_1 
+global g_1 method PRpath method
 method  = 0;
 if(~getSize(g_1,method))
     %¸ø³öÌáÊ¾ĞÅÏ¢
@@ -102,7 +108,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ĞÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,method,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
         %ÏÔÊ¾Èı¸öÍ¼±í»¹ÓĞÏà¹Ø¿Ø¼ş 
         displayWhole(g_1);
 else
@@ -119,7 +125,7 @@ function Indirectpushbutton_1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 clear g_1 method 
-global g_1,method 
+global g_1 method PRpath
 method  = 1;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ĞÅÏ¢
@@ -127,7 +133,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ĞÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(0,g_1))
         %ÏÔÊ¾Èı¸öÍ¼±í»¹ÓĞÏà¹Ø¿Ø¼ş     
         displayWhole(g_1);
 else
@@ -144,7 +150,7 @@ function Indirectpushbutton_2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 clear g_1 method 
-global g_1,method 
+global g_1 method PRpath 
 method  = 2;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ĞÅÏ¢
@@ -152,7 +158,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ĞÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(0,g_1))
         %ÏÔÊ¾Èı¸öÍ¼±í»¹ÓĞÏà¹Ø¿Ø¼ş    
         displayWhole(g_1);
 else
@@ -169,7 +175,7 @@ function Indirectpushbutton_3_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of Indirectpushbutton_3
 clear g_1 method 
-global g_1,method 
+global g_1 method PRpath 
 method  = 3;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ĞÅÏ¢
@@ -177,7 +183,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ĞÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(0,g_1))
         %ÏÔÊ¾Èı¸öÍ¼±í»¹ÓĞÏà¹Ø¿Ø¼ş  
         displayWhole(g_1);
 else
@@ -192,7 +198,7 @@ function Indirectpushbutton_4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 clear g_1 method 
-global g_1,method 
+global g_1 method PRpath 
 method  = 4;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ĞÅÏ¢
@@ -200,7 +206,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ĞÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(0,g_1))
         %ÏÔÊ¾Èı¸öÍ¼±í»¹ÓĞÏà¹Ø¿Ø¼ş    
         displayWhole(g_1);
 else
@@ -218,7 +224,7 @@ function Indirectpushbutton_5_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 % --- Executes on button press in Indirectpushbutton_4.
 clear g_1 method 
-global g_1,method 
+global g_1 method PRpath 
 method  = 5;
 if(~getSize(g_1,method))
      %¸ø³öÌáÊ¾ĞÅÏ¢
@@ -226,7 +232,7 @@ if(~getSize(g_1,method))
 elseif isequal(PRpath,0)
      %¸ø³öÌáÊ¾ĞÅÏ¢,Â·¾¶²»´æÔÚ
     return       
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(PRpath,0,g_1))
+elseif(load_needed_data(PRpath,method,g_1)&&calculate(0,g_1))
         %ÏÔÊ¾Èı¸öÍ¼±í»¹ÓĞÏà¹Ø¿Ø¼ş  
         displayWhole(g_1);
 else
@@ -272,12 +278,12 @@ else
     end 
     
     if(n ==1 )
-        set(handles.KSlastpushbutton,'Enable',inactive);
+        set(handles.KSlastpushbutton,'Enable','inactive');
     else
         set(handles.KSlastpushbutton,'Enable',on);
     end
     if(method == 0&& n==g_1.caSzie )||(method ~=0 && n == g_1.Size)
-        set(handles.KSnextpushbutton,'Enable',inactive);
+        set(handles.KSnextpushbutton,'Enable','inactive');
     else
         set(handles.KSnextpushbutton,'Enable',on);
     end
@@ -341,7 +347,7 @@ if((method == 0 &&n<g_1.caSize)||(method ~= 0&&n<g_1.size))%ÅĞ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·¨ºÍ
 end
 
 if (method == 0 &&n==g_1.caSize)||(method ~= 0&&n==g_1.size)
-    set(handles.KSnextpushbutton,'Enable',inactive);
+    set(handles.KSnextpushbutton,'Enable','inactive');
 end
 
 if n>1
@@ -460,12 +466,12 @@ else
     end 
     
     if(ib ==1 )
-        set(handles.PCiblastpushbutton,'Enable',inactive);
+        set(handles.PCiblastpushbutton,'Enable','inactive');
     else
         set(handles.PCiblastpushbutton,'Enable',on);
     end
     if(method == 0&& ib ==g_1.ibSzie )||(method ~=0 && ib == g_1.Size)
-        set(handles.PCibnextpushbutton,'Enable',inactive);
+        set(handles.PCibnextpushbutton,'Enable','inactive');
     else
         set(handles.PCibnextpushbutton,'Enable',on);
     end
@@ -504,10 +510,10 @@ if(ib>=2)
 end
 
 if ib== 1
-    set(handles.PCiblastpushbutton,'Enable',inactive);
+    set(handles.PCiblastpushbutton,'Enable','inactive');
 end
 if (method == 0 &&ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size)
-    set(handles.PCibnextpushbutton,'Enable',inactive);
+    set(handles.PCibnextpushbutton,'Enable','inactive');
 end
 
 
@@ -532,7 +538,7 @@ if((method == 0 && ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size))%ÅĞ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·
 end
 
 if (method == 0 &&ib==g_1.ibSize)||(method ~= 0&&ib==g_1.size)
-    set(handles.PCibnextpushbutton,'Enable',inactive);
+    set(handles.PCibnextpushbutton,'Enable','inactive');
 end
 
 if ib>1
@@ -578,12 +584,12 @@ else
     end 
     
     if(oa ==1 )
-        set(handles.PCoalastpushbutton,'Enable',inactive);
+        set(handles.PCoalastpushbutton,'Enable','inactive');
     else
         set(handles.PCoalastpushbutton,'Enable',on);
     end
     if(method == 0&& oa ==g_1.oaSzie )||(method ~=0 && oa == g_1.Size)
-        set(handles.PCoanextpushbutton,'Enable',inactive);
+        set(handles.PCoanextpushbutton,'Enable','inactive');
     else
         set(handles.PCoanextpushbutton,'Enable',on);
     end
@@ -623,10 +629,10 @@ if(oa>=2)
 end
 
 if oa== 1
-    set(handles.PCoalastpushbutton,'Enable',inactive);
+    set(handles.PCoalastpushbutton,'Enable','inactive');
 end
 if (method == 0 &&oa<g_1.oaSize)||(method ~= 0&&oa<g_1.size)
-    set(handles.PCoanextpushbutton,'Enable',inactive);
+    set(handles.PCoanextpushbutton,'Enable','inactive');
 end
 
 % --- Executes on button press in PCoanextpushbutton17.
@@ -648,7 +654,7 @@ if((method == 0 && oa<g_1.oaSize)||(method ~= 0&&oa<g_1.size))%ÅĞ¶Ïµ±Ç°Ñ¡ÔñµÄ·½·
 end
 
 if (method == 0 &&oa==g_1.oaSize)||(method ~= 0&&oa==g_1.size)
-    set(handles.PCoanextpushbutton,'Enable',inactive);
+    set(handles.PCoanextpushbutton,'Enable','inactive');
 end
 
 if oa>1
@@ -693,12 +699,12 @@ else
     end 
     
     if(ib ==1 )
-        set(handles.FTiblastpushbutton,'Enable',inactive);
+        set(handles.FTiblastpushbutton,'Enable','inactive');
     else
         set(handles.FTiblastpushbutton,'Enable',on);
     end
     if(method == 0&& ib ==g_1.ibSzie )||(method ~=0 && ib == g_1.Size)
-        set(handles.FTibnextpushbutton,'Enable',inactive);
+        set(handles.FTibnextpushbutton,'Enable','inactive');
     else
         set(handles.FTibnextpushbutton,'Enable',on);
     end
@@ -736,10 +742,10 @@ if(ib>=2)
 end
 
 if ib == 1
-    set(handles.FTiblastpushbutton,'Enable',inactive);
+    set(handles.FTiblastpushbutton,'Enable','inactive');
 end
 if (method == 0 &&ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size)
-    set(handles.FTibnextpushbutton,'Enable',inactive);
+    set(handles.FTibnextpushbutton,'Enable','inactive');
 end
 
 % --- Executes on button press in FTibnextpushbutton.
@@ -760,7 +766,7 @@ if((method == 0 && ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size))
 end
 
 if (method == 0 &&ib==g_1.ibSize)||(method ~= 0&&ib==g_1.size)
-    set(handles.FTibnextpushbutton,'Enable',inactive);
+    set(handles.FTibnextpushbutton,'Enable','inactive');
 end
 
 if ib>1
@@ -792,7 +798,7 @@ if(method == 0)
 else
     s.Size = g_1.Size;
 end
-if(load_needed_data(PRpath,method,s)&&calculate(PRpath,method,s))
+if(load_needed_data(PRpath,method,s)&&calculate(method,s))
 %ÏÔÊ¾ËùÓĞ¶Ô±ÈµÄÍ¼ÏñºÍÑ¡ÔñÊÇ·ñÏÔÊ¾¶Ô±ÈµÄ¸´Ñ¡¿ò
 KSn = str2num(get(handles.KSnedit,'String'));
 PCib = str2num(get(handles.PCibedit,'String'));
@@ -854,40 +860,42 @@ function displayWhole(g)
 %Detailed explanation goes here
 %Ç°ÖÃÌõ¼ş£º²úÆ·Àà¶ÔÏógµÄÊı¾İ¶¼ÒÑ¾­¼ÓÔØ
 global method 
+handles=guidata(gcf);
 set(handles.KSnedit,'String','1');
 set(handles.PCoaedit,'String','1');
 set(handles.PCibedit,'String','1');
 set(handles.FTibedit,'String','1');
-KSDraw(g,1);
-PCDraw(g,1,1);
-FTDraw(g,1,1);
-set(handles.KSlastpushbutton,'Enable',inactive);
+KSDraw(1,g);
+PCDraw(1,1,g);
+FTDraw(1,1,g);
+set(handles.KSlastpushbutton,'Enable','inactive');
 set(handles.KSnextpushbutton,'Enable',on);
-set(handles.PCiblastpushbutton,'Enable',inactive);
+set(handles.PCiblastpushbutton,'Enable','inactive');
 set(handles.PCibnextpushbutton,'Enable',on);
-set(handles.PCoalastpushbutton,'Enable',inactive);
+set(handles.PCoalastpushbutton,'Enable','inactive');
 set(handles.PCoanextpushbutton,'Enable',on);
-set(handles.FTiblastpushbutton,'Enable',inactive);
+set(handles.FTiblastpushbutton,'Enable','inactive');
 set(handles.FTibnextpushbutton,'Enable',on);
 
 if (method == 0 &&n==g_1.caSize)||(method ~= 0&&n==g.size)
-    set(handles.KSnextpushbutton,'Enable',inactive);
+    set(handles.KSnextpushbutton,'Enable','inactive');
 end  
 if (method == 0 &&n==g.ibSize)||(method ~= 0&&n==g.size)
-    set(handles.PCibnextpushbutton,'Enable',inactive);
+    set(handles.PCibnextpushbutton,'Enable','inactive');
 end 
 
 if (method == 0 &&n==g.oaSize)||(method ~= 0&&n==g.size)
-    set(handles.PCoanextpushbutton,'Enable',inactive);
+    set(handles.PCoanextpushbutton,'Enable','inactive');
 end 
 if (method == 0 &&n==g.ibSize)||(method ~= 0&&n==g.size)
-    set(handles.FTibnextpushbutton,'Enable',inactive);
+    set(handles.FTibnextpushbutton,'Enable','inactive');
 end 
 
 
 
 
-function KSDraw(g,s,n)
+function KSDraw( n,g,s )
+%global f
 handles=guidata(gcf);
 cla(handles.KSaxes);    %Çå³ıÍ¼Ïñ
 %cla reset;
@@ -897,15 +905,15 @@ ylabel(handles.KSaxes,'K_s [N/m]');
 set(handles.gridset,'Value',0);
 switch nargin
     case 2        
-        semilogy(handles.axes1,g.f(:),abs(g.KS(n,:)),'--r');    %semilogy ºá×ø±êÎªÏßĞÔ×ø±êÖá£¬×İ×ø±êÎª¶ÔÊı×ø±êÖá     
+        semilogy(handles.KSaxes,g.f(:),abs(g.KS( n ,:)),'--r');    %semilogy ºá×ø±êÎªÏßĞÔ×ø±êÖá£¬×İ×ø±êÎª¶ÔÊı×ø±êÖá     
     case 3 
-        semilogy(handles.axes1,g.f(:),abs(g.KS(n,:)),'--r'); 
+        semilogy(handles.KSaxes,g.f(:),abs(g.KS( n ,:)),'--r'); 
         hold on ;
-        semilogy(handles.axes1,s.f(:),abs(s.KS(n,:)),'--b'); %semilogy ºá×ø±êÎªÏßĞÔ×ø±êÖá£¬×İ×ø±êÎª¶ÔÊı×ø±êÖá
+        semilogy(handles.KSaxes,s.f(:),abs(s.KS( n ,:)),'--b'); %semilogy ºá×ø±êÎªÏßĞÔ×ø±êÖá£¬×İ×ø±êÎª¶ÔÊı×ø±êÖá
 end
 
 
- function PCDraw(g,s,ib,oa)
+ function PCDraw(ib,oa,g,s)
 %Ç°ÖÃÌõ¼ş ibºÍoaµÄÖµÕıÈ·
 %PCÃæ°åÓĞ¶Ô±ÈµÄ¹¦ÄÜ
 handles=guidata(gcf);
@@ -924,7 +932,7 @@ switch nargin
 end
   
 
-function FTDraw(g,s,ib)
+function FTDraw(ib,g,s)
 %Ç°ÖÃÌõ¼ş ibµÄÖµÕıÈ·,g,sµÄÊı¾İÒÑ¾­È«²¿¼ÓÔØ¼ÆËãÍê
 %FTÃæ°åÓĞ¶Ô±ÈµÄ
 

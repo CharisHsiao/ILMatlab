@@ -68,9 +68,10 @@ pan1pos=get(handles.KSpanel,'Position');
 set(handles.PCpanel,'Position',pan1pos)
 set(handles.FTpanel,'Position',pan1pos)
 
-global caSize oaSize ibSize KSsaved KS
-KSsaved=KS;
-set(handles.SizeText,'String',['耦合点数=' num2str(caSize) '  响应点数=' num2str(oaSize)  '  激励点数=' num2str(ibSize)]); %设置对象属性值
+global  KSsaved g_1
+g_1=Project()
+KSsaved=g_1.KS;
+set(handles.SizeText,'String',['耦合点数=' num2str(g_1.caSize) '  响应点数=' num2str(g_1.oaSize)  '  激励点数=' num2str(g_1.ibSize)]); %设置对象属性值
 KsDraw(1);
 
 % --- Outputs from this function are returned to the command line.
@@ -84,12 +85,12 @@ function varargout = DirectMainUI_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 function KsDraw(n)
-global f KS
+global f g_1
 cla;    %清除图像
 cla reset;
 handles=guidata(gcf);
 set(handles.KSn,'String',num2str(n));
-semilogy(handles.axes1,f(:),abs(KS(n,:)));    %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
+semilogy(handles.axes1,f(:),abs(g_1.KS(n,:)));    %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
 xlabel('频率 [Hz]');ylabel('K_s [N/m]');
 title(strcat('KS ',num2str(n)));
 set(handles.gridset,'Value',0);
