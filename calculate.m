@@ -22,6 +22,8 @@ switch measure
     otherwise
         bool = 0;
 end
+cal_PC(measure,g);
+cal_FT(measure,g);
 
 
 
@@ -98,7 +100,7 @@ function cal_Indirect_1(g)
 %clear f size  Hcaca Hcbcb Hoaca Hcbib Hsoaib KS C
 %global f size  Hcaca Hcbcb Hoaca Hcbib Hsoaib KS C
 matLength=401;
-global f;
+%global f;
     msg=msgbox('载入计算中，请稍后...[计算完成后本对话框将自动关闭]','提示', 'help','modal');
 
     I=eye(g.size,g.size);
@@ -147,11 +149,11 @@ end
 
 % Moving average---> smoothing results:
 temp=g.KS;
- KK=max(1./f(2:matLength));
+ KK=max(1./g.f(2:matLength));
  t=15;
  for i=1:g.size
-    for n=(t+1):(length(f)-t-1)
-        g.KS(i,n)=mean(temp(i,(n-t:n+t)))*(KK/f(n))^(1/5);
+    for n=(t+1):(length(g.f)-t-1)
+        g.KS(i,n)=mean(temp(i,(n-t:n+t)))*(KK/g.f(n))^(1/5);
     end
 end
 
@@ -223,7 +225,7 @@ for i=1:g.size
 end
 % Moving average---> smoothing results:
 temp=g.KS;
- KK=max(1./f(2:matLength));
+ KK=max(1./g.f(2:matLength));
  t=15;
  for i=1:g.size
     for n=(t+1):(length(f)-t-1)
@@ -291,7 +293,7 @@ for i=1:g.size
 end
 % Moving average---> smoothing results:
 temp= g.KS;
- KK=max(1./f(2:matLength));
+ KK=max(1./g.f(2:matLength));
  t=15;
  for i=1:g.size
     for n=(t+1):(length(f)-t-1)
@@ -362,7 +364,7 @@ end
 
 % Moving average---> smoothing results:
 temp=g.KS;
- KK=max(1./f(2:matLength));
+ KK=max(1./g.f(2:matLength));
  t=15;
  for i=1:g.size
     for n=(t+1):(length(f)-t-1)
@@ -437,7 +439,7 @@ end
 
 % Moving average---> smoothing results:
 temp=g.KS;
- KK=max(1./f(2:matLength));%指第二个到四百零一个
+ KK=max(1./g.f(2:matLength));%指第二个到四百零一个
  t=15;
  for i=1:g.size
     for n=(t+1):(length(f)-t-1)  %length(f)获取f中行数或列数中的最大值
@@ -446,3 +448,71 @@ temp=g.KS;
 end
 %clear Hscaca Hscacb Hscbcb Hsoaca Hscaib Hsoaib HscacaTemp HscacbTemp HscbcbTemp HsoacaTemp HscaibTemp KsTemp;
 close(msg);
+
+
+
+
+function  cal_PC(method,g)
+  %  global matLength Hoaca Hcbib 
+  matLength = 401;
+  if isequal(method,0) 
+      g.PC = zeros(g.oaSize,g.ibSize,g.caSize);
+    for ib = 1:g.ibSize
+        for oa = 1:g.oaSize
+            %g.PC(oa,ib) = zeros(g.caSize,1);
+            for j=1:g.caSize
+                temp=0;
+                for k=1:matLength
+                     temp=temp+(g.Hoaca(oa,j,k)*g.C(j,j,k)*g.Hcbib(j,ib,k))^2;
+                end
+                g.PC(oa,ib,j)= sqrt(temp/matLength);
+            end
+        end
+    end
+  else
+      g.PC = zeros(g.size,g.size,g.size,1);
+      for ib = 1:g.size
+        for oa = 1:g.size
+           % g.PC(oa,ib) = zeros(g.size,1);
+            for j=1:g.size
+                temp=0;
+                for k=1:matLength
+                     temp=temp+(g.Hoaca(oa,j,k)*g.C(j,j,k)*g.Hcbib(j,ib,k))^2;
+                end
+                g.PC(oa,ib,j)= sqrt(temp/matLength);
+            end
+        end
+      end
+  end
+          
+            
+   function  cal_FT(method,g)
+       % global matLength ibSize cbSize size C Hcbib    
+       matLength  = 401;
+        if(isequal(method,0))
+            m=g.ibSize;
+            n=g.caSize;        
+        else 
+            m =  g.size;
+            n = g.size;
+        end
+        g.FT = zeros(n,m);     
+       for i = 1:m
+        for j=1:n
+          temp=0;         
+          for k=1:matLength
+            temp=temp+(g.C(j,j,k)*g.Hcbib(j,i,k))^2;
+          end
+               g.FT(i,j)= sqrt(temp/matLength);
+        end
+      end
+
+       %  for i = 1:m
+       %   for j = 1:n
+       %       temp = 0;
+       %       for k = 1:matLength
+       %           temp = temp + C(i,i,k)*Hcbib(i,j,k);
+       %       end
+       %       FT(i,j) = temp;
+       %   end
+       %end

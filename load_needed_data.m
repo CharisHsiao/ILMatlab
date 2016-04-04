@@ -1,25 +1,25 @@
-function  [TORF] =  load_needed_data(path,measure,g)
+function  [bool] =  load_needed_data(path,measure,g)
  %根据选择的计算方法和路径，导入相应方法所需的所有原始数据
 
   if isequal(path,0)
-     TORF= 0; %退出所在函数的执行
+     bool= 0; %退出所在函数的执行
   elseif(measure == 0)%直接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
-    g.Hscaca = loaddata(path,'Hscaca','Hsca','ca',g.caSize,g.caSize,g);      %调用函数loadcbf读入数据    function ret=loadcbf(path,name,head,tail,row,col)
+    g.Hscaca = loaddata(path,'Hscaca','Hsca','ca',g,g.caSize,g.caSize);      %调用函数loadcbf读入数据    function ret=loadcbf(path,name,head,tail,row,col)
     waitbar(1/6,hwait,'已载入Hscaca');
-    g.Hscacb = loaddata(path,'Hscacb','Hsca','cb',g.caSize,g.caSize,g);
+    g.Hscacb = loaddata(path,'Hscacb','Hsca','cb',g,g.caSize,g.caSize);
     waitbar(2/6,hwait,'已载入Hscacb');
-    g.Hscbcb = loaddata(path,'Hscbcb','Hscb','cb',g.caSize,g.caSize,g);
+    g.Hscbcb = loaddata(path,'Hscbcb','Hscb','cb',g,g.caSize,g.caSize);
     waitbar(3/6,hwait,'已载入Hscbcb');
-    g.Hsoaca = loaddata(path,'Hsoaca','Hsoa','ca',g.oaSize,g.caSize,g);
+    g.Hsoaca = loaddata(path,'Hsoaca','Hsoa','ca',g,g.oaSize,g.caSize);
     waitbar(4/6,hwait,'已载入Hsoaca');
-    g.Hscaib = loaddata(path,'Hscaib','Hsca','ib',g.caSize,g.ibSize,g);
+    g.Hscaib = loaddata(path,'Hscaib','Hsca','ib',g,g.caSize,g.ibSize);
     waitbar(5/6,hwait,'已载入Hscaib');
-    g.Hsoaib = loaddata(path,'Hsoaib','Hsoa','ib',g.oaSize,g.ibSize,g);
+    g.Hsoaib = loaddata(path,'Hsoaib','Hsoa','ib',g,g.oaSize,g.ibSize);
     waitbar(1,hwait,'已载入Hsoaib');
     pause(0.1);
     close(hwait);
-    TORF= 1;
+    bool= 1;
 
 
   elseif(measure == 1)%第一类间接逆子结构法
@@ -36,7 +36,7 @@ function  [TORF] =  load_needed_data(path,measure,g)
     waitbar(1,hwait,'已载入Hsoaib');
     pause(0.1);
     close(hwait);
-     TORF= 1;
+     bool= 1;
 
      elseif(measure == 2)%第二类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
@@ -56,7 +56,7 @@ function  [TORF] =  load_needed_data(path,measure,g)
     waitbar(1,hwait,'已载入Hcbib');
     pause(0.1);
     close(hwait);
-     TORF= 1;
+     bool= 1;
 
      elseif(measure == 3)%第三类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
@@ -72,7 +72,7 @@ function  [TORF] =  load_needed_data(path,measure,g)
     waitbar(1,hwait,'已载入Hsoaib');
     pause(0.1);
     close(hwait);
-     TORF= 1;
+     bool= 1;
 
     elseif(measure == 4)%第四类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    %function ret=myload2(path,name,head,tail,size)
@@ -88,7 +88,7 @@ function  [TORF] =  load_needed_data(path,measure,g)
     waitbar(1,hwait,'已载入Hscaca');
     pause(0.1);
     close(hwait);
-     TORF= 1;
+     bool= 1;
 
      elseif(measure == 5)%第五类间接逆子结构法
         hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
@@ -107,7 +107,7 @@ function  [TORF] =  load_needed_data(path,measure,g)
 
         pause(0.1);
         close(hwait);
-     TORF= 1;
+     bool= 1;
      else
 
   end

@@ -4,6 +4,8 @@ classdef Project <handle
         KS
         C
         f
+        PC
+        FT
         caSize
         oaSize
         ibSize
