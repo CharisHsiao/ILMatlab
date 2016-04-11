@@ -22,7 +22,7 @@ function varargout = CoverPage(varargin)
 
 % Edit the above text to modify the response to help CoverPage
 
-% Last Modified by GUIDE v2.5 03-Apr-2016 20:13:55
+% Last Modified by GUIDE v2.5 11-Apr-2016 16:27:22
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -113,6 +113,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','on');
     set(handles.outtext,'Visible','on');
+    set(handles.Comparecheckbox,'Visible','off');
     set(handles.methodtext,'String','直接逆子结构法');
     set(handles.ctext,'String',['耦合点数：' num2str(g_1.caSize)]);
     set(handles.intext,'String',['激励点数ib：' num2str(g_1.ibSize)]);
@@ -145,6 +146,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
+    set(handles.Comparecheckbox,'Visible','off');
     set(handles.methodtext,'String','第一类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
@@ -176,6 +178,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
+    set(handles.Comparecheckbox,'Visible','off');
     set(handles.methodtext,'String','第二类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
@@ -206,6 +209,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
+    set(handles.Comparecheckbox,'Visible','off');
     set(handles.methodtext,'String','第三类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
@@ -234,6 +238,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
+    set(handles.Comparecheckbox,'Visible','off');
     set(handles.methodtext,'String','第四类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
@@ -265,6 +270,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
+    set(handles.Comparecheckbox,'Visible','off');
     set(handles.methodtext,'String','第五类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
@@ -888,7 +894,7 @@ if(method == 0)
     s.ibSize = g_1.ibSize;
     s.oaSize = g_1.oaSize;
 else
-    s.Size = g_1.size;
+    s.size = g_1.size;
 end
 if(load_needed_data(PRpath,method,s)&&calculate(method,s))
     %显示所有对比的图像和选择是否显示对比的复选框
@@ -900,7 +906,7 @@ if(load_needed_data(PRpath,method,s)&&calculate(method,s))
     KSDraw(KSn,g_1,s);
     PCDraw(PCib,PCoa,g_1,s);
     FTDraw(FTib,g_1,s);
-    set(handles.Comparecheckbox,'Visible',on);
+    set(handles.Comparecheckbox,'Visible','on');
     set(handles.Comparecheckbox,'Value',1);
     KSsSave = s.KS;
 else
@@ -994,8 +1000,7 @@ function KSDraw( n,g,s )
 handles=guidata(gcf);
 cla(handles.KSaxes);    %清除图像
 %cla reset;
-xlabel(handles.KSaxes,'频率 [Hz]');
-ylabel(handles.KSaxes,'K_s [N/m]');
+
 %title(strcat('KS ',num2str(n)));
 set(handles.gridset,'Value',0);
 switch nargin
@@ -1006,94 +1011,84 @@ switch nargin
         hold on ;
         semilogy(handles.KSaxes,s.f(:),abs(s.KS( n ,:)),'--r'); %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
 end
-
+xlabel(handles.KSaxes,'频率 [Hz]');
+ylabel(handles.KSaxes,'K_s [N/m]');
 
 function PCDraw(ib,oa,g,s)
 %前置条件 ib和oa的值正确
 %PC面板有对比的功能
-global method LoadSflag
+global method 
 handles=guidata(gcf);
 cla(handles.PCaxes);
 i = oa;
 j = ib;
-xlabel(handles.PCaxes,'测量点');
-ylabel(handles.PCaxes,'');
+
 if method == 0
     temp1 =zeros(g.caSize,1);%用于提取获取g.PC(i,j)
-    temp2 =zeros(g.caSize,2);%用于提取获取g.PC(oa,ib)和s.PC(oa,ib)
+%     temp2 =zeros(g.caSize,2);%用于提取获取g.PC(oa,ib)和s.PC(oa,ib)
     for k = 1:g.caSize;
         temp1(k)=g.PC(i,j,k);%获取g.PC(i,j)
     end
     %x=(1:g.caSize);
 else
     temp1 =zeros(g.size,1);
-    temp2 =zeros(g.size,2);
+%     temp2 =zeros(g.size,2);
     for k = 1:g.size;
-        temp1(k)=g.PC(i,j,k);%获取s.PC(i,j)
+        temp1(k)=g.PC(i,j,k);%获取g.PC(i,j)
     end
-    % x=(1:g.size);
 end
 
-if LoadSflag
-    if method == 0
-        temps =zeros(s.caSize,1);
-        for k = 1:g.caSize;
-            temps(k)=s.PC(i,j,k);
-        end
-    else
-        temps =zeros(g.size,1);
-        for k = 1:s.size;
-            temps(k)=s.PC(i,j,k);
-        end
-    end
-    temp2=[temp1 temps];
-end
 
 
 switch nargin
     case 3
         bar(handles.PCaxes,abs(temp1),'b');
         % bar(handles.PCaxes,abs(temp1),.4,'b');
-    case 4
-        bar(handles.PCaxes,abs(temp2),1);
+    case 4     
+    if method == 0
+        temps =zeros(s.caSize,1);
+        for k = 1:g.caSize;
+            temps(k)=s.PC(i,j,k);%获取s.PC(i,j)
+        end
+    else
+        temps =zeros(g.size,1);
+        for k = 1:s.size;
+            temps(k)=s.PC(i,j,k);%获取s.PC(i,j)
+        end
+    end
+    temp2=[temp1 temps];
+        bar(handles.PCaxes,abs(temp2),1.3);
         %  bar(handles.PCaxes,x-.2,abs(temp),.4,'b');
         %  hold on;
         %  bar(handles.PCaxes,x+.2,abs(temps),.4,'r');
 end
-
+xlabel(handles.PCaxes,'测量点');
+ylabel(handles.PCaxes,'');
 
 function FTDraw(ib,g,s)
 %前置条件 ib的值正确,g,s的数据已经全部加载计算完
-%FT面板有对比的
-global method LoadSflag
+%FT面板有对比的  
 handles=guidata(gcf);
 cla(handles.FTaxes);
-xlabel(handles.FTaxes,'测量点');
-ylabel(handles.FTaxes,'');
-temp1 = g.FT(:,ib);
-temp2 = g.FT(:,ib);
-if LoadSflag
-    temp2 = [g.FT(:,ib) s.FT(:,ib)];
-end
+% temp1 = g.FT(:,ib);
+% temp2 = g.FT(:,ib);
+% if LoadSflag
+%     temp2 = [g.FT(:,ib) s.FT(:,ib)];
+% end
 
 switch nargin
     case 2
+        temp1 = g.FT(:,ib);
         bar(handles.FTaxes,abs(temp1),'b');
         %            bar(handles.FTaxes,abs(g.FT(:,ib)),'b');
         %           title(strcat('FT:  ',num2str(Myib)));
     case 3
-        bar(handles.FTaxes,abs(temp2),1);
-        %         if method==0
-        %             x =(1:g.caSize);
-        %         else
-        %             x = (1:g.size);
-        %         end
-        
-        %        bar(handles.FTaxes,x-.2,abs(g.FT(:,ib)),.4,'b');
-        %         hold on;
-        %         bar(handles.FTaxes,x-.2,abs(s.FT(:,ib)),.4,'r');
-end
+         temp2 = [g.FT(:,ib) s.FT(:,ib)];
+        bar(handles.FTaxes,abs(temp2),1.3);
 
+end
+xlabel(handles.FTaxes,'测量点');
+ylabel(handles.FTaxes,'');
 
 
 % --------------------------------------------------------------------
@@ -1181,19 +1176,19 @@ function Comparecheckbox_Callback(hObject, eventdata, handles)
 % hObject    handle to Comparecheckbox (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global g_1,s
+global g_1 s
 KSn = str2num(get(handles.KSnedit,'String'));
 PCib = str2num(get(handles.PCibedit,'String'));
 PCoa = str2num(get(handles.PCoaedit,'String'));
 FTib = str2num(get(handles.FTibedit,'String'));
 if(isequal(get(handles.Comparecheckbox,'Value'),1))
-    KSDraw(g_1,s,KSn);
-    PCDraw(g_1,s,PCib,PCoa);
-    FTDraw(g_1,s,FTib);
+    KSDraw(KSn,g_1,s);
+    PCDraw(PCib,PCoa,g_1,s);
+    FTDraw(FTib,g_1,s);
 else
-    KSDraw(g_1,KSn);
-    PCDraw(g_1,PCib,PCoa);
-    FTDraw(g_1,FTib);
+    KSDraw(KSn,g_1);
+    PCDraw(PCib,PCoa,g_1);
+    FTDraw(FTib,g_1);
 end
 
 
@@ -1207,3 +1202,10 @@ function KSaxes_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: place code in OpeningFcn to populate KSaxes
+
+
+% --------------------------------------------------------------------
+function Load_Callback(hObject, eventdata, handles)
+% hObject    handle to Load (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

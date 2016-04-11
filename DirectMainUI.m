@@ -69,7 +69,7 @@ set(handles.PCpanel,'Position',pan1pos)
 set(handles.FTpanel,'Position',pan1pos)
 
 global  KSsaved g_1
-g_1=Project()
+%g_1=Project()
 KSsaved=g_1.KS;
 set(handles.SizeText,'String',['耦合点数=' num2str(g_1.caSize) '  响应点数=' num2str(g_1.oaSize)  '  激励点数=' num2str(g_1.ibSize)]); %设置对象属性值
 KsDraw(1);
