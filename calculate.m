@@ -1,6 +1,6 @@
-function [bool] = calculate(measure,g)
+function [bool] = calculate(g)
 %根据选用的计算方法，计算出KS、C、PC、F
-switch measure
+switch g.method
     case 0
         cal_Direct(g);
         bool = 1;
@@ -22,8 +22,8 @@ switch measure
     otherwise
         bool = 0;
 end
-cal_PC(measure,g);
-cal_FT(measure,g);
+cal_PC(g);
+cal_FT(g);
 
 
 
@@ -452,10 +452,10 @@ close(msg);
 
 
 
-function  cal_PC(method,g)
+function  cal_PC(g)
   %  global matLength Hoaca Hcbib 
   matLength = 401;
-  if isequal(method,0) 
+  if isequal(g.method,0) 
       g.PC = zeros(g.oaSize,g.ibSize,g.caSize);
     for ib = 1:g.ibSize
         for oa = 1:g.oaSize
@@ -486,10 +486,10 @@ function  cal_PC(method,g)
   end
           
             
-   function  cal_FT(method,g)
+   function  cal_FT(g)
        % global matLength ibSize cbSize size C Hcbib    
        matLength  = 401;
-        if(isequal(method,0))
+        if(isequal(g.method,0))
             m=g.ibSize;
             n=g.caSize;        
         else 

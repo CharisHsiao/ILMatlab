@@ -1,8 +1,8 @@
-function [ result ] = getSize(g_1,method)
+function [ result ] = getSize(g_1)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-switch method 
+switch g_1.method 
     case 0
     defaultanswer={'6','3','8'};
     sizeParameter=inputdlg({'耦合点数','响应点数','激励点数'},'设定参数',1,defaultanswer);

@@ -1,9 +1,9 @@
-function  [bool] =  load_needed_data(path,measure,g)
+function  [bool] =  load_needed_data(path,g)
  %根据选择的计算方法和路径，导入相应方法所需的所有原始数据
 
   if isequal(path,0)
      bool= 0; %退出所在函数的执行
-  elseif(measure == 0)%直接逆子结构法
+  elseif(g.method == 0)%直接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
     g.Hscaca = loaddata(path,'Hscaca','Hsca','ca',g,g.caSize,g.caSize);      %调用函数loadcbf读入数据    function ret=loadcbf(path,name,head,tail,row,col)
     waitbar(1/6,hwait,'已载入Hscaca');
@@ -22,7 +22,7 @@ function  [bool] =  load_needed_data(path,measure,g)
     bool= 1;
 
 
-  elseif(measure == 1)%第一类间接逆子结构法
+  elseif(g_1.method == 1)%第一类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    %function ret=myload2(path,name,head,tail,size)
     g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);       %Hcaca = myload2 (path,'Hcaca','Hca','ca',size);
     waitbar(1/5,hwait,'已载入Hcaca');
@@ -38,7 +38,7 @@ function  [bool] =  load_needed_data(path,measure,g)
     close(hwait);
      bool= 1;
 
-     elseif(measure == 2)%第二类间接逆子结构法
+     elseif(g_1.method == 2)%第二类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
     g.Hoaca = loaddata (path,'Hoaca','Hoa','ca',g,g.size);
     waitbar(1/7,hwait,'已载入Hoaca');
@@ -58,7 +58,7 @@ function  [bool] =  load_needed_data(path,measure,g)
     close(hwait);
      bool= 1;
 
-     elseif(measure == 3)%第三类间接逆子结构法
+     elseif(g_1.method == 3)%第三类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
     g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);       %Hcaca = myload2 (path,'Hcaca','HAca','ca',size);
     waitbar(1/5,hwait,'已载入Hcaca');
@@ -74,7 +74,7 @@ function  [bool] =  load_needed_data(path,measure,g)
     close(hwait);
      bool= 1;
 
-    elseif(measure == 4)%第四类间接逆子结构法
+    elseif(g_1.method == 4)%第四类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    %function ret=myload2(path,name,head,tail,size)
     g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);       %Hcaca = myload2 (path,'Hcaca','Hca','ca',size);
     waitbar(1/5,hwait,'已载入Hcaca');
@@ -90,7 +90,7 @@ function  [bool] =  load_needed_data(path,measure,g)
     close(hwait);
      bool= 1;
 
-     elseif(measure == 5)%第五类间接逆子结构法
+     elseif(g_1.method == 5)%第五类间接逆子结构法
         hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
         g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);
         waitbar(1/6,hwait,'已载入Hcaca');

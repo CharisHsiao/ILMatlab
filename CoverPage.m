@@ -22,7 +22,7 @@ function varargout = CoverPage(varargin)
 
 % Edit the above text to modify the response to help CoverPage
 
-% Last Modified by GUIDE v2.5 11-Apr-2016 16:27:22
+% Last Modified by GUIDE v2.5 11-Apr-2016 20:04:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -65,19 +65,22 @@ set(handles.PCoalastpushbutton,'Enable','inactive');
 set(handles.PCoanextpushbutton,'Enable','inactive');
 set(handles.FTiblastpushbutton,'Enable','inactive');
 set(handles.FTibnextpushbutton,'Enable','inactive');
-%set(handles.Loadsample,'Enble','off');
+%set(handles.Load_Loadsample,'Enble','off');
 set(handles.Comparecheckbox,'Value',0);
 set(handles.Comparecheckbox,'Visible','off');
 set(handles.gridset,'Value',0);
 global LoadSflag ;
 LoadSflag = 0;
-global g_1 s PRpath ALpath method
+global g_1 s  fileInfo
 g_1 = Project();
 s = Project();
-PRpath = 'F:\git\ILMatlab\AssemblyLine_1\General';
-ALpath = 'F:\git\ILMatlab\AssemblyLine_1';
-method = 0;
-
+fileInfo = FileInfo();
+fileInfo.PrPath = 'F:\git\ILMatlab\AssemblyLine_1\General';
+fileInfo.AlPath = 'F:\git\ILMatlab\AssemblyLine_1';
+fileInfo.PrName = 'General';
+fileInfo.AlName = 'AssemblyLine_1';
+g_1.method = 0;
+% set(g_1,'method',0);
 
 % UIWAIT makes CoverPage wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -100,15 +103,15 @@ function Directpushbutton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 clear g_1
-global g_1 method PRpath  KSgSave
-method  = 0;
-if(~getSize(g_1,method))
+global g_1  fileInfo  KSgSave
+g_1.method  = 0;
+if(~getSize(g_1))
     %给出提示信息
     return;
-elseif isequal(PRpath,0)
+elseif isequal(fileInfo.PrPath,0)
     %给出提示信息,路径不存在
     return
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
+elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     %显示三个图表还有相关控件
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','on');
@@ -121,7 +124,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 method
+    clear g_1 
     return;
 end
 
@@ -132,16 +135,16 @@ function Indirectpushbutton_1_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 method
-global g_1 method PRpath KSgSave
-method  = 1;
-if(~getSize(g_1,method))
+clear g_1 
+global g_1  fileInfo KSgSave
+g_1.method  = 1;
+if(~getSize(g_1))
     %给出提示信息
     return;
-elseif isequal(PRpath,0)
+elseif isequal(fileInfo.PrPath,0)
     %给出提示信息,路径不存在
     return
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
+elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     %显示三个图表还有相关控件
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
@@ -153,7 +156,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     
 else
     %给出提示信息
-    clear g_1 method
+    clear g_1 
     return;
 end
 
@@ -164,16 +167,16 @@ function Indirectpushbutton_2_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 method
-global g_1 method PRpath KSgSave
-method  = 2;
-if(~getSize(g_1,method))
+clear g_1 
+global g_1  fileInfo KSgSave
+g_1.method  = 2;
+if(~getSize(g_1))
     %给出提示信息
     return;
-elseif isequal(PRpath,0)
+elseif isequal(fileInfo.PrPath,0)
     %给出提示信息,路径不存在
     return
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
+elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     %显示三个图表还有相关控件
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
@@ -184,7 +187,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 method
+    clear g_1 
     return;
 end
 
@@ -195,16 +198,16 @@ function Indirectpushbutton_3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of Indirectpushbutton_3
-clear g_1 method
-global g_1 method PRpath KSgSave
-method  = 3;
-if(~getSize(g_1,method))
+clear g_1
+global g_1  fileInfo KSgSave
+g_1.method  = 3;
+if(~getSize(g_1))
     %给出提示信息
     return;
-elseif isequal(PRpath,0)
+elseif isequal(fileInfo.PrPath,0)
     %给出提示信息,路径不存在
     return
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
+elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     %显示三个图表还有相关控件
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
@@ -224,16 +227,16 @@ function Indirectpushbutton_4_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 method
-global g_1 method PRpath KSgSave
+clear g_1 
+global g_1  fileInfo KSgSave
 method  = 4;
-if(~getSize(g_1,method))
+if(~getSize(g_1))
     %给出提示信息
     return;
-elseif isequal(PRpath,0)
+elseif isequal(fileInfo.PrPath,0)
     %给出提示信息,路径不存在
     return
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
+elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     %显示三个图表还有相关控件
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
@@ -244,7 +247,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 method
+    clear g_1 
     return;
 end
 
@@ -256,16 +259,16 @@ function Indirectpushbutton_5_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % --- Executes on button press in Indirectpushbutton_4.
-clear g_1 method
-global g_1 method PRpath KSgSave
-method  = 5;
-if(~getSize(g_1,method))
+clear g_1 
+global g_1  fileInfo KSgSave
+g_1.method  = 5;
+if(~getSize(g_1))
     %给出提示信息
     return;
-elseif isequal(PRpath,0)
+elseif isequal(fileInfo.PrPath,0)
     %给出提示信息,路径不存在
     return
-elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
+elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     %显示三个图表还有相关控件
     KSgSave = g_1.KS;
     set(handles.intext,'Visible','off');
@@ -276,7 +279,7 @@ elseif(load_needed_data(PRpath,method,g_1)&&calculate(method,g_1))
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 method
+    clear g_1 
     return;
 end
 
@@ -287,7 +290,7 @@ function KSnedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of KSnedit as text
 %        str2double(get(hObject,'String')) returns contents of KSnedit as a double
-global method LoadSflag g_1 s
+global  LoadSflag g_1 s
 str = get(handles.KSnedit,'String');
 len = length(str);
 s = [];
@@ -310,7 +313,7 @@ else
         errordlg({'请输入数据';});
     else
         
-        if((method == 0&&n<=g_1.caSize )||(method ~=0 && n <= g_1.size))&&n>0
+        if((g_1.method == 0&&n<=g_1.caSize )||(g_1.method ~=0 && n <= g_1.size))&&n>0
             if(~LoadSflag)
                 KSDraw(n,g_1);
             else
@@ -328,7 +331,7 @@ else
         else
             set(handles.KSlastpushbutton,'Enable','on');
         end
-        if(method == 0&& n==g_1.caSize )||(method ~=0 && n == g_1.size)
+        if(g_1.method == 0&& n==g_1.caSize )||(g_1.method ~=0 && n == g_1.size)
             set(handles.KSnextpushbutton,'Enable','inactive');
         else
             set(handles.KSnextpushbutton,'Enable','on');
@@ -359,7 +362,7 @@ function KSlastpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to KSlastpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 n=str2num(get(handles.KSnedit,'String'));
 if~isempty(get(handles.KSnedit,'String'))
     
@@ -378,7 +381,7 @@ if~isempty(get(handles.KSnedit,'String'))
         set(handles.KSlastpushbutton,'Enable','on');
     end
     
-    if((method == 0 &&n<g_1.caSize)||(method ~= 0&&n<g_1.size))
+    if((g_1.method == 0 &&n<g_1.caSize)||(g_1.method ~= 0&&n<g_1.size))
         set(handles.KSnextpushbutton,'Enable','on');
     else
         set(handles.KSnextpushbutton,'Enable','inactive');
@@ -389,10 +392,10 @@ function KSnextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to KSnextpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 n=str2num(get(handles.KSnedit,'String'));
 if~isempty(get(handles.KSnedit,'String'))
-    if((method == 0 &&n<g_1.caSize)||(method ~= 0&&n<g_1.size))%判断当前选择的方法和KSn的最大值
+    if((g_1.method == 0 &&n<g_1.caSize)||(g_1.method ~= 0&&n<g_1.size))%判断当前选择的方法和KSn的最大值
         n=n+1;
         set(handles.KSnedit,'String',num2str(n));
         if(~LoadSflag)
@@ -402,7 +405,7 @@ if~isempty(get(handles.KSnedit,'String'))
         end
     end
     
-    if (method == 0 &&n==g_1.caSize)||(method ~= 0&&n==g_1.size)
+    if (g_1.method == 0 &&n==g_1.caSize)||(g_1.method ~= 0&&n==g_1.size)
         set(handles.KSnextpushbutton,'Enable','inactive');
     end
     
@@ -418,7 +421,7 @@ function Smoothpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Smoothpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global g_1 s LoadSflag method
+global g_1 s LoadSflag 
 
 
 n = str2num(get(handles.KSnedit,'String'));
@@ -492,7 +495,7 @@ function PCibedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of PCibedit as text
 %        str2double(get(hObject,'String')) returns contents of PCibedit as a double
-global method LoadSflag g_1 s
+global  LoadSflag g_1 s
 str = get(handles.PCibedit,'String');
 len = length(str);
 s = [];
@@ -515,7 +518,7 @@ else
         errordlg({'请输入数据';});
     else
         oa = str2num(get(handles.PCoaedit,'String'));
-        if((method == 0&& ib<=g_1.ibSize )||(method ~=0 &&  ib <= g_1.size))&&ib>0
+        if((g_1.method == 0&& ib<=g_1.ibSize )||(g_1.method ~=0 &&  ib <= g_1.size))&&ib>0
             if(~LoadSflag)
                 PCDraw(ib,oa,g_1);
             else
@@ -532,7 +535,7 @@ else
         else
             set(handles.PCiblastpushbutton,'Enable','on');
         end
-        if(method == 0&& ib ==g_1.ibSize )||(method ~=0 && ib == g_1.size)
+        if(g_1.method == 0&& ib ==g_1.ibSize )||(g_1.method ~=0 && ib == g_1.size)
             set(handles.PCibnextpushbutton,'Enable','inactive');
         else
             set(handles.PCibnextpushbutton,'Enable','on');
@@ -559,7 +562,7 @@ function PCiblastpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCiblastpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
 if~isempty(get(handles.PCibedit,'String'))
@@ -569,7 +572,7 @@ if~isempty(get(handles.PCibedit,'String'))
         if(~LoadSflag)  %判断是否已经加载样品的数据
             PCDraw(ib,oa,g_1);
         else
-            PCDraw(g_1,s,ob,oa);
+            PCDraw(ob,oa,g_1,s);
         end
     end
     
@@ -578,7 +581,7 @@ if~isempty(get(handles.PCibedit,'String'))
     else
         set(handles.PCiblastpushbutton,'Enable','on');
     end
-    if (method == 0 &&ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size)
+    if (g_1.method == 0 &&ib<g_1.ibSize)||(g_1.method ~= 0&&ib<g_1.size)
         set(handles.PCibnextpushbutton,'Enable','on');
     else
         set(handles.PCibnextpushbutton,'Enable','inactive');
@@ -593,11 +596,11 @@ function PCibnextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCibnextpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
 if~isempty(get(handles.PCibedit,'String'))
-    if((method == 0 && ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size))%判断当前选择的方法和KSn的最大值
+    if((g_1.method == 0 && ib<g_1.ibSize)||(g_1.method ~= 0&&ib<g_1.size))%判断当前选择的方法和KSn的最大值
         ib=ib+1;
         set(handles.PCibedit,'String',num2str(ib));
         if(isequal(LoadSflag,0))
@@ -607,7 +610,7 @@ if~isempty(get(handles.PCibedit,'String'))
         end
     end
     
-    if (method == 0 &&ib==g_1.ibSize)||(method ~= 0&&ib==g_1.size)
+    if (g_1.method == 0 &&ib==g_1.ibSize)||(g_1.method ~= 0&&ib==g_1.size)
         set(handles.PCibnextpushbutton,'Enable','inactive');
     end
     
@@ -624,7 +627,7 @@ function PCoaedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of PCoaedit as text
 %        str2double(get(hObject,'String')) returns contents of PCoaedit as a double
-global method LoadSflag g_1 s
+global  LoadSflag g_1 s
 str = get(handles.Poabedit,'String');
 len = length(str);
 s = [];
@@ -647,7 +650,7 @@ else
         errordlg({'请输入数据';});
     else
         ib = str2num(get(handles.PCibedit,'String'));
-        if((method == 0&&oa<=g_1.oaSize )||(method ~=0 && oa <= g_1.size))&&oa>0
+        if((g_1.method == 0&&oa<=g_1.oaSize )||(g_1.method ~=0 && oa <= g_1.size))&&oa>0
             if(~LoadSflag)
                 PCDraw(ib,oa,g_1);
             else
@@ -664,7 +667,7 @@ else
         else
             set(handles.PCoalastpushbutton,'Enable','on');
         end
-        if(method == 0&& oa ==g_1.oaSzie )||(method ~=0 && oa == g_1.size)
+        if(g_1.method == 0&& oa ==g_1.oaSzie )||(g_1.method ~=0 && oa == g_1.size)
             set(handles.PCoanextpushbutton,'Enable','inactive');
         else
             set(handles.PCoanextpushbutton,'Enable','on');
@@ -692,7 +695,7 @@ function PCoalastpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCoalastpushbutton16 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
 if~isempty(get(handles.PCoaedit,'String'))
@@ -711,7 +714,7 @@ if~isempty(get(handles.PCoaedit,'String'))
     else
         set(handles.PCoalastpushbutton,'Enable','on');
     end
-    if (method == 0 &&oa<g_1.oaSize)||(method ~= 0&&oa<g_1.size)
+    if (g_1.method == 0 &&oa<g_1.oaSize)||(g_1.method ~= 0&&oa<g_1.size)
         set(handles.PCoanextpushbutton,'Enable','on');
     else
         set(handles.PCoanextpushbutton,'Enable','inactive');
@@ -724,11 +727,11 @@ function PCoanextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to PCoanextpushbutton17 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 ib=str2num(get(handles.PCibedit,'String'));
 oa=str2num(get(handles.PCoaedit,'String'));
 if~isempty(get(handles.PCoaedit,'String'))
-    if((method == 0 && oa<g_1.oaSize)||(method ~= 0&&oa<g_1.size))%判断当前选择的方法和最大值
+    if((g_1.method == 0 && oa<g_1.oaSize)||(g_1.method ~= 0&&oa<g_1.size))%判断当前选择的方法和最大值
         oa=oa+1;
         set(handles.PCoaedit,'String',num2str(oa));
         if ~LoadSflag
@@ -738,7 +741,7 @@ if~isempty(get(handles.PCoaedit,'String'))
         end
     end
     
-    if (method == 0 &&oa==g_1.oaSize)||(method ~= 0&&oa==g_1.size)
+    if (g_1.method == 0 &&oa==g_1.oaSize)||(g_1.method ~= 0&&oa==g_1.size)
         set(handles.PCoanextpushbutton,'Enable','inactive');
     end
     
@@ -754,7 +757,7 @@ function FTibedit_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of FTibedit as text
 %        str2double(get(hObject,'String')) returns contents of FTibedit as a double
-global method LoadSflag g_1 s
+global  LoadSflag g_1 s
 str = get(handles.FTibedit,'String');
 len = length(str);
 s = [];
@@ -776,7 +779,7 @@ else
     if isequal(length(ib),0)
         errordlg({'请输入数据';});
     else
-        if((method == 0&& ib<=g_1.ibSize )||(method ~=0 &&  ib <= g_1.size))&&ib>0
+        if((g_1.method == 0&& ib<=g_1.ibSize )||(g_1.method ~=0 &&  ib <= g_1.size))&&ib>0
             if(~LoadSflag)
                 FTDraw(ib,g_1)
             else
@@ -793,7 +796,7 @@ else
         else
             set(handles.FTiblastpushbutton,'Enable','on');
         end
-        if(method == 0&& ib ==g_1.ibSize )||(method ~=0 && ib == g_1.size)
+        if(g_1.method == 0&& ib ==g_1.ibSize )||(g_1.method ~=0 && ib == g_1.size)
             set(handles.FTibnextpushbutton,'Enable','inactive');
         else
             set(handles.FTibnextpushbutton,'Enable','on');
@@ -820,7 +823,7 @@ function FTiblastpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to FTiblastpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 ib=str2num(get(handles.FTibedit,'String'));
 if~isempty(get(handles.FTibedit,'String'))
     if(ib>=2)
@@ -838,7 +841,7 @@ if~isempty(get(handles.FTibedit,'String'))
     else
         set(handles.FTiblastpushbutton,'Enable','on');
     end
-    if (method == 0 &&ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size)
+    if (g_1.method == 0 &&ib<g_1.ibSize)||(g_1.method ~= 0&&ib<g_1.size)
         set(handles.FTibnextpushbutton,'Enable','on');
     else
         set(handles.FTibnextpushbutton,'Enable','inactive');
@@ -850,10 +853,10 @@ function FTibnextpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to FTibnextpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global LoadSflag g_1 s method
+global LoadSflag g_1 s 
 ib=str2num(get(handles.FTibedit,'String'));
 if~isempty(get(handles.FTibedit,'String'))
-    if((method == 0 && ib<g_1.ibSize)||(method ~= 0&&ib<g_1.size))
+    if((g_1.method == 0 && ib<g_1.ibSize)||(g_1.method ~= 0&&ib<g_1.size))
         ib=ib+1;
         set(handles.FTibedit,'String',num2str(ib));
         if(~LoadSflag)
@@ -863,7 +866,7 @@ if~isempty(get(handles.FTibedit,'String'))
         end
     end
     
-    if (method == 0 &&ib==g_1.ibSize)||(method ~= 0&&ib==g_1.size)
+    if (g_1.method == 0 &&ib==g_1.ibSize)||(g_1.method ~= 0&&ib==g_1.size)
         set(handles.FTibnextpushbutton,'Enable','inactive');
     end
     
@@ -884,19 +887,20 @@ function File_Callback(hObject, eventdata, handles)
 
 
 % --------------------------------------------------------------------
-function Loadsample_Callback(hObject, eventdata, handles)
-% hObject    handle to Loadsample (see GCBO)
+function Load_Loadsample_Callback(hObject, eventdata, handles)
+% hObject    handle to Load_Loadsample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global method s g_1 PRpath  KSsSave LoadSflag
-if(method == 0)
+global  s g_1 fileInfo  KSsSave LoadSflag
+if(g_1.method == 0)
     s.caSize = g_1.caSize;
     s.ibSize = g_1.ibSize;
     s.oaSize = g_1.oaSize;
 else
     s.size = g_1.size;
 end
-if(load_needed_data(PRpath,method,s)&&calculate(method,s))
+s.method = g_1.method;
+if(load_needed_data(fileInfo.PrPath,s)&&calculate(s))
     %显示所有对比的图像和选择是否显示对比的复选框
     LoadSflag = 1;
     KSn = str2num(get(handles.KSnedit,'String'));
@@ -918,8 +922,8 @@ end
 
 
 % --------------------------------------------------------------------
-function File_loadPR_Callback(hObject, eventdata, handles)
-% hObject    handle to File_loadPR (see GCBO)
+function File_LoadPR_Callback(hObject, eventdata, handles)
+% hObject    handle to File_LoadPR (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -959,7 +963,6 @@ function displayWhole(g)
 %UNTITLED3 Summary of this function goes here
 %Detailed explanation goes here
 %前置条件：产品类对象g的数据都已经加载
-global method
 
 handles=guidata(gcf);
 set(handles.KSnedit,'String','1');
@@ -978,17 +981,17 @@ set(handles.PCoanextpushbutton,'Enable','on');
 set(handles.FTiblastpushbutton,'Enable','inactive');
 set(handles.FTibnextpushbutton,'Enable','on');
 
-if (method == 0 &&1==g.caSize)||(method ~= 0&& 1 ==g.size)
+if (g.method == 0 &&1==g.caSize)||(g.method ~= 0&& 1 ==g.size)
     set(handles.KSnextpushbutton,'Enable','inactive');
 end
-if (method == 0 &&1==g.ibSize)||(method ~= 0&& 1 ==g.size)
+if (g.method == 0 &&1==g.ibSize)||(g.method ~= 0&& 1 ==g.size)
     set(handles.PCibnextpushbutton,'Enable','inactive');
 end
 
-if (method == 0 &&1==g.oaSize)||(method ~= 0&& 1==g.size)
+if (g.method == 0 &&1==g.oaSize)||(g.method ~= 0&& 1==g.size)
     set(handles.PCoanextpushbutton,'Enable','inactive');
 end
-if (method == 0 &&1==g.ibSize)||(method ~= 0&& 1 ==g.size)
+if (g.method == 0 &&1==g.ibSize)||(g.method ~= 0&& 1 ==g.size)
     set(handles.FTibnextpushbutton,'Enable','inactive');
 end
 
@@ -1005,11 +1008,11 @@ cla(handles.KSaxes);    %清除图像
 set(handles.gridset,'Value',0);
 switch nargin
     case 2
-        semilogy(handles.KSaxes,g.f(:),abs(g.KS( n ,:)),'--b');    %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
+        semilogy(handles.KSaxes,g.f(:),abs(g.KS( n ,:)),'b');    %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
     case 3
-        semilogy(handles.KSaxes,g.f(:),abs(g.KS( n ,:)),'--b');
+        semilogy(handles.KSaxes,g.f(:),abs(g.KS( n ,:)),'b');
         hold on ;
-        semilogy(handles.KSaxes,s.f(:),abs(s.KS( n ,:)),'--r'); %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
+        semilogy(handles.KSaxes,s.f(:),abs(s.KS( n ,:)),'r'); %semilogy 横坐标为线性坐标轴，纵坐标为对数坐标轴
 end
 xlabel(handles.KSaxes,'频率 [Hz]');
 ylabel(handles.KSaxes,'K_s [N/m]');
@@ -1017,13 +1020,12 @@ ylabel(handles.KSaxes,'K_s [N/m]');
 function PCDraw(ib,oa,g,s)
 %前置条件 ib和oa的值正确
 %PC面板有对比的功能
-global method 
 handles=guidata(gcf);
 cla(handles.PCaxes);
 i = oa;
 j = ib;
 
-if method == 0
+if g.method == 0
     temp1 =zeros(g.caSize,1);%用于提取获取g.PC(i,j)
 %     temp2 =zeros(g.caSize,2);%用于提取获取g.PC(oa,ib)和s.PC(oa,ib)
     for k = 1:g.caSize;
@@ -1045,7 +1047,7 @@ switch nargin
         bar(handles.PCaxes,abs(temp1),'b');
         % bar(handles.PCaxes,abs(temp1),.4,'b');
     case 4     
-    if method == 0
+    if g.method == 0
         temps =zeros(s.caSize,1);
         for k = 1:g.caSize;
             temps(k)=s.PC(i,j,k);%获取s.PC(i,j)
@@ -1207,5 +1209,26 @@ function KSaxes_CreateFcn(hObject, eventdata, handles)
 % --------------------------------------------------------------------
 function Load_Callback(hObject, eventdata, handles)
 % hObject    handle to Load (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function File_GenerateWord_Callback(hObject, eventdata, handles)
+% hObject    handle to File_GenerateWord (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function File_GenerateExcel_Callback(hObject, eventdata, handles)
+% hObject    handle to File_GenerateExcel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function File_GenerateMat_Callback(hObject, eventdata, handles)
+% hObject    handle to File_GenerateMat (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
