@@ -22,7 +22,7 @@ function varargout = GenerateWordUI(varargin)
 
 % Edit the above text to modify the response to help GenerateWordUI
 
-% Last Modified by GUIDE v2.5 11-Apr-2016 20:13:02
+% Last Modified by GUIDE v2.5 17-Apr-2016 16:58:00
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,6 +58,9 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+
+
+
 % UIWAIT makes GenerateWordUI wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -71,3 +74,65 @@ function varargout = GenerateWordUI_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+
+% --- Executes on selection change in KSlistbox.
+function KSlistbox_Callback(hObject, eventdata, handles)
+% hObject    handle to KSlistbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = get(hObject,'String') returns KSlistbox contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from KSlistbox
+
+
+% --- Executes during object creation, after setting all properties.
+function KSlistbox_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to KSlistbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+global g_1 
+ KSList = [];
+if g_1.method == 0
+    n= g_1.caSize;
+else
+    n= g_1.size;
+end
+
+for i =1:n
+    KSList{i+1} = ['KS ', num2str(i)];
+end
+set(hObject,'String',KSList);
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function KSuitable_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to KSuitable (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+global g_1
+clear KSList
+if g_1.method == 0
+    n= g_1.caSize;
+else
+    n= g_1.size;
+end
+KSList = [];
+for i = 1:n
+    temp = strcat('KS ',num2str(i));   
+    KSList{i,1} = true;
+    KSList{i,2} =temp; 
+end
+data = {true,'First'; false,'Second'; true,'Third'; false,'and last'};
+set(hObject,'Data',KSList);
+set(hObject,'columneditable',true);
+
+% data = {true,'First'; false,'Second'; true,'Third'; false,'and last'};
+% hTable = uitable('Data',data,'RowName',[],'ColumnName',[],...
+%         'BackgroundColor',[1,1,1],'Position',[10,10,100,70],'ColumnWidth',{20,60});
+% uitable('Tag',KSuitable);

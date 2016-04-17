@@ -36,4 +36,4 @@ if ~isempty(time)
 end
 %---------------------splash-end--------------------------------
 
-CoverPage   %加载初始选择界面
+ImportUI    %加载初始选择界面

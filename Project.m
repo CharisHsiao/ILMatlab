@@ -7,9 +7,9 @@ classdef Project <handle
         f
         PC
         FT
-        caSize
-        oaSize
-        ibSize
+        caSize%耦合点
+        oaSize%响应点
+        ibSize%激励点
         size
         Hscaca
         Hscacb

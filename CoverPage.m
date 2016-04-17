@@ -950,8 +950,9 @@ function About_Maker_Callback(hObject, eventdata, handles)
 % hObject    handle to About_Maker (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-
+message= '暨南大学大学生创新创业项目软件研发，电气信息学院，指导老师：吕广庆';
+h=msgbox(message,'软件开发方','listdlg');
+% uniwait(h);
 % --------------------------------------------------------------------
 function About_Help_Callback(hObject, eventdata, handles)
 % hObject    handle to About_Help (see GCBO)
@@ -1221,7 +1222,7 @@ function Start_GenerateWord_Callback(hObject, eventdata, handles)
 % hObject    handle to Start_GenerateWord (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+GenerateWordUI
 
 % --------------------------------------------------------------------
 function Start_GenerateExcel_Callback(hObject, eventdata, handles)
