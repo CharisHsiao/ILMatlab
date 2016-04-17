@@ -59,16 +59,27 @@ for k=2:matLength%k为1时计算结果为NaN，跳过
     for i=1:g.caSize
         for j=1:g.caSize
             HscacaTemp(i,j)=g.Hscaca(i,matLength*(j-1)+k);
-            HscacbTemp(i,j)=g.Hscacb(i,matLength*(j-1)+k);
-            HscbcbTemp(i,j)=g.Hscbcb(i,matLength*(j-1)+k);
-            if i<=g.oaSize
-                HsoacaTemp(i,j)=g.Hsoaca(i,matLength*(j-1)+k);
-            end
-            if j<=g.ibSize
-                HscaibTemp(i,j)=g.Hscaib(i,matLength*(j-1)+k);
-            end
-        end
+             HscacbTemp(i,j)=g.Hscacb(i,matLength*(j-1)+k);
+             HscbcbTemp(i,j)=g.Hscbcb(i,matLength*(j-1)+k);
+%             if i<=g.oaSize
+%                 HsoacaTemp(i,j)=g.Hsoaca(i,matLength*(j-1)+k);
+%             end
+%             if j<=g.ibSize
+%                 HscaibTemp(i,j)=g.Hscaib(i,matLength*(j-1)+k);
+%             end
+         end
     end
+      for i=1:g.oaSize
+        for j=1:g.caSize
+                HsoacaTemp(i,j)=g.Hsoaca(i,matLength*(j-1)+k);
+        end
+      end
+     for i=1:g.caSize
+        for j=1:g.ibSize
+                HscaibTemp(i,j)=g.Hscaib(i,matLength*(j-1)+k);
+        end
+      end
+    
             KsTemp=inv(HscacaTemp/(HscacbTemp')*HscbcbTemp-HscacbTemp);
             g.Ks(:,:,k)=KsTemp;
             g.Hcaca(:,:,k)=HscacbTemp/(HscbcbTemp-HscacbTemp)/(KsTemp);

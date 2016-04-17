@@ -1,5 +1,5 @@
 function varargout = CoverPage(varargin)
-% COVERPAGE M-file for CoverPage.fig
+% COVERPAGE M-start for CoverPage.fig
 %      COVERPAGE, by itself, creates a new COVERPAGE or raises the existing
 %      singleton*.
 %
@@ -22,7 +22,7 @@ function varargout = CoverPage(varargin)
 
 % Edit the above text to modify the response to help CoverPage
 
-% Last Modified by GUIDE v2.5 11-Apr-2016 20:04:20
+% Last Modified by GUIDE v2.5 17-Apr-2016 12:33:00
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -53,6 +53,7 @@ function CoverPage_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to CoverPage (see VARARGIN)
 
 % Choose default command line output for CoverPage
+
 handles.output = hObject;
 
 % Update handles structure
@@ -69,22 +70,23 @@ set(handles.FTibnextpushbutton,'Enable','inactive');
 set(handles.Comparecheckbox,'Value',0);
 set(handles.Comparecheckbox,'Visible','off');
 set(handles.gridset,'Value',0);
-global LoadSflag ;
+global LoadSflag 
 LoadSflag = 0;
-global g_1 s  fileInfo
+clear  global g_1 s  fileInfo
+global g_1 s  
 g_1 = Project();
 s = Project();
-fileInfo = FileInfo();
-fileInfo.PrPath = 'F:\git\ILMatlab\AssemblyLine_1\General';
-fileInfo.AlPath = 'F:\git\ILMatlab\AssemblyLine_1';
-fileInfo.PrName = 'General';
-fileInfo.AlName = 'AssemblyLine_1';
+% fileInfo = FileInfo();
+% fileInfo.PrPath = 'F:\git\ILMatlab\AssemblyLine_1\General';
+% fileInfo.AlPath = 'F:\git\ILMatlab\AssemblyLine_1';
+% fileInfo.PrName = 'General';
+% fileInfo.AlName = 'AssemblyLine_1';
 g_1.method = 0;
-% set(g_1,'method',0);
+
 
 % UIWAIT makes CoverPage wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
-
+% uiwait(handles.CoverPagefigure);
+% uiwait(GetPath);
 
 % --- Outputs from this function are returned to the command line.
 function varargout = CoverPage_OutputFcn(hObject, eventdata, handles)
@@ -129,7 +131,6 @@ else
 end
 
 
-
 % --- Executes on button press in Indirectpushbutton_1.
 function Indirectpushbutton_1_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_1 (see GCBO)
@@ -159,6 +160,8 @@ else
     clear g_1 
     return;
 end
+
+
 
 
 
@@ -427,7 +430,7 @@ global g_1 s LoadSflag
 n = str2num(get(handles.KSnedit,'String'));
 KStemp = g_1.KS;
 
-if(method == 0)
+if(g_1.method == 0)
     t = round(g_1.caSize/4);
     Sizetemp = g_1.caSize;
 else
@@ -878,8 +881,8 @@ end
 
 
 % --------------------------------------------------------------------
-function File_Callback(hObject, eventdata, handles)
-% hObject    handle to File (see GCBO)
+function Start_Callback(hObject, eventdata, handles)
+% hObject    handle to Start (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -922,11 +925,11 @@ end
 
 
 % --------------------------------------------------------------------
-function File_LoadPR_Callback(hObject, eventdata, handles)
-% hObject    handle to File_LoadPR (see GCBO)
+function Start_LoadPR_Callback(hObject, eventdata, handles)
+% hObject    handle to Start_LoadPR (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+uiwait(GetPath);
 
 % --------------------------------------------------------------------
 function File_EditDSPath_Callback(hObject, eventdata, handles)
@@ -1214,21 +1217,36 @@ function Load_Callback(hObject, eventdata, handles)
 
 
 % --------------------------------------------------------------------
-function File_GenerateWord_Callback(hObject, eventdata, handles)
-% hObject    handle to File_GenerateWord (see GCBO)
+function Start_GenerateWord_Callback(hObject, eventdata, handles)
+% hObject    handle to Start_GenerateWord (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
 % --------------------------------------------------------------------
-function File_GenerateExcel_Callback(hObject, eventdata, handles)
-% hObject    handle to File_GenerateExcel (see GCBO)
+function Start_GenerateExcel_Callback(hObject, eventdata, handles)
+% hObject    handle to Start_GenerateExcel (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
 % --------------------------------------------------------------------
-function File_GenerateMat_Callback(hObject, eventdata, handles)
-% hObject    handle to File_GenerateMat (see GCBO)
+function Start_GenerateMat_Callback(hObject, eventdata, handles)
+% hObject    handle to Start_GenerateMat (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function Start_Exit_Callback(hObject, eventdata, handles)
+% hObject    handle to Start_Exit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+selection = questdlg(['退出程序?'],...
+    ['退出 ' ],...
+    '是','否','是');
+if strcmp(selection,'否')
+    return;
+end
+delete(handles.CoverPagefigure)
+clear all

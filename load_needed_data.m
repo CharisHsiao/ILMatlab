@@ -22,7 +22,7 @@ function  [bool] =  load_needed_data(path,g)
     bool= 1;
 
 
-  elseif(g_1.method == 1)%第一类间接逆子结构法
+  elseif(g.method == 1)%第一类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    %function ret=myload2(path,name,head,tail,size)
     g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);       %Hcaca = myload2 (path,'Hcaca','Hca','ca',size);
     waitbar(1/5,hwait,'已载入Hcaca');
