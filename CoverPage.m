@@ -66,7 +66,14 @@ set(handles.PCoalastpushbutton,'Enable','inactive');
 set(handles.PCoanextpushbutton,'Enable','inactive');
 set(handles.FTiblastpushbutton,'Enable','inactive');
 set(handles.FTibnextpushbutton,'Enable','inactive');
-%set(handles.Load_Loadsample,'Enble','off');
+set(handles.Directpushbutton,'Enable','inactive');
+set(handles.Indirectpushbutton_1,'Enable','inactive');
+set(handles.Indirectpushbutton_2,'Enable','inactive');
+set(handles.Indirectpushbutton_3,'Enable','inactive');
+set(handles.Indirectpushbutton_4,'Enable','inactive');
+set(handles.Indirectpushbutton_5,'Enable','inactive');
+% set(handles.Load_Loadsample,'Check','off');
+set(handles.Load_Loadsample,'Enable','off');
 set(handles.Comparecheckbox,'Value',0);
 set(handles.Comparecheckbox,'Visible','off');
 set(handles.gridset,'Value',0);
@@ -104,7 +111,7 @@ function Directpushbutton_Callback(hObject, eventdata, handles)
 % hObject    handle to Directpushbutton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1
+clear  g_1 
 global g_1  fileInfo  KSgSave
 g_1.method  = 0;
 if(~getSize(g_1))
@@ -120,13 +127,14 @@ elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     set(handles.outtext,'Visible','on');
     set(handles.Comparecheckbox,'Visible','off');
     set(handles.methodtext,'String','直接逆子结构法');
+    set(handles.Load_Loadsample,'Enable','on');
     set(handles.ctext,'String',['耦合点数：' num2str(g_1.caSize)]);
     set(handles.intext,'String',['激励点数ib：' num2str(g_1.ibSize)]);
     set(handles.outtext,'String',['响应点数oa：' num2str(g_1.oaSize)]);
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 
+    clear  g_1  
     return;
 end
 
@@ -136,8 +144,10 @@ function Indirectpushbutton_1_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 
+clear  g_1 
 global g_1  fileInfo KSgSave
+
+% g_1 = Project();
 g_1.method  = 1;
 if(~getSize(g_1))
     %给出提示信息
@@ -151,13 +161,14 @@ elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
     set(handles.Comparecheckbox,'Visible','off');
+    set(handles.Load_Loadsample,'Enable','on');
     set(handles.methodtext,'String','第一类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
     
 else
     %给出提示信息
-    clear g_1 
+    clear  g_1  
     return;
 end
 
@@ -170,7 +181,7 @@ function Indirectpushbutton_2_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 
+clear   g_1
 global g_1  fileInfo KSgSave
 g_1.method  = 2;
 if(~getSize(g_1))
@@ -185,12 +196,13 @@ elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
     set(handles.Comparecheckbox,'Visible','off');
+    set(handles.Load_Loadsample,'Enable','on');
     set(handles.methodtext,'String','第二类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 
+    clear  g_1 
     return;
 end
 
@@ -216,12 +228,13 @@ elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
     set(handles.Comparecheckbox,'Visible','off');
+    set(handles.Load_Loadsample,'Enable','on');
     set(handles.methodtext,'String','第三类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 method
+    clear  g_1  method
     return;
 end
 
@@ -230,9 +243,9 @@ function Indirectpushbutton_4_Callback(hObject, eventdata, handles)
 % hObject    handle to Indirectpushbutton_4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear g_1 
+clear  g_1  
 global g_1  fileInfo KSgSave
-method  = 4;
+g_1.method  = 4;
 if(~getSize(g_1))
     %给出提示信息
     return;
@@ -245,12 +258,13 @@ elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
     set(handles.Comparecheckbox,'Visible','off');
+    set(handles.Load_Loadsample,'Enable','on');
     set(handles.methodtext,'String','第四类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 
+    clear  g_1  
     return;
 end
 
@@ -262,7 +276,7 @@ function Indirectpushbutton_5_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % --- Executes on button press in Indirectpushbutton_4.
-clear g_1 
+clear  g_1  
 global g_1  fileInfo KSgSave
 g_1.method  = 5;
 if(~getSize(g_1))
@@ -277,12 +291,13 @@ elseif(load_needed_data(fileInfo.PrPath,g_1)&&calculate(g_1))
     set(handles.intext,'Visible','off');
     set(handles.outtext,'Visible','off');
     set(handles.Comparecheckbox,'Visible','off');
+    set(handles.Load_Loadsample,'Enable','on');
     set(handles.methodtext,'String','第五类间接逆子结构法');
     set(handles.ctext,'String',['点数：' num2str(g_1.size)]);
     displayWhole(g_1);
 else
     %给出提示信息
-    clear g_1 
+    clear  g_1  
     return;
 end
 
@@ -930,6 +945,12 @@ function Start_LoadPR_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 uiwait(GetPath);
+set(handles.Directpushbutton,'Enable','on');
+set(handles.Indirectpushbutton_1,'Enable','on');
+set(handles.Indirectpushbutton_2,'Enable','on');
+set(handles.Indirectpushbutton_3,'Enable','on');
+set(handles.Indirectpushbutton_4,'Enable','on');
+set(handles.Indirectpushbutton_5,'Enable','on');
 
 % --------------------------------------------------------------------
 function File_EditDSPath_Callback(hObject, eventdata, handles)

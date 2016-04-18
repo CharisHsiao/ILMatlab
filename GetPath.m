@@ -58,6 +58,7 @@ clear global data_path
 global data_path   %暂时存放AssemblyLine的路径，
                    %默认Product的初始路径也为data_path
 data_path = cd;
+set(hObject,'Name',data_path);
 ALpopupmenu_CreateFcn(handles.ALpopupmenu, eventdata, handles);
 PRpopupmenu_CreateFcn(handles.PRpopupmenu, eventdata, handles);     
  
@@ -67,9 +68,8 @@ PRpopupmenu_CreateFcn(handles.PRpopupmenu, eventdata, handles);
 %                   'ALpath',' ',...
 %                   'PRname',' ',...
 %                   'PRpath',' ');
+ 
 
-data_path=cd;  
-set(hObject,'Name',data_path);
 
 
 

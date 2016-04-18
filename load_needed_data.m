@@ -6,7 +6,11 @@ function  [bool] =  load_needed_data(path,g)
   elseif(g.method == 0)%直接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
     g.Hscaca = loaddata(path,'Hscaca','Hsca','ca',g,g.caSize,g.caSize);      %调用函数loadcbf读入数据    function ret=loadcbf(path,name,head,tail,row,col)
-    waitbar(1/6,hwait,'已载入Hscaca');
+%     if~isloaded(g.Hscaca) 
+%         bool = 0;return;
+%     else
+        waitbar(1/6,hwait,'已载入Hscaca');
+%     end
     g.Hscacb = loaddata(path,'Hscacb','Hsca','cb',g,g.caSize,g.caSize);
     waitbar(2/6,hwait,'已载入Hscacb');
     g.Hscbcb = loaddata(path,'Hscbcb','Hscb','cb',g,g.caSize,g.caSize);
@@ -23,22 +27,22 @@ function  [bool] =  load_needed_data(path,g)
 
 
   elseif(g.method == 1)%第一类间接逆子结构法
-    hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    %function ret=myload2(path,name,head,tail,size)
-    g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);       %Hcaca = myload2 (path,'Hcaca','Hca','ca',size);
+    hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    
+    g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);      
     waitbar(1/5,hwait,'已载入Hcaca');
-    g.Hcbcb =loaddata (path,'Hcbcb','Hcb','cb',g,g.size);       %Hcbcb = myload2 (path,'Hcbcb','Hcb','cb',size);
+    g.Hcbcb =loaddata (path,'Hcbcb','Hcb','cb',g,g.size);       
     waitbar(2/5,hwait,'已载入Hcbcb');
-    g.Hoaca = loaddata (path,'Hoaca','Hoa','ca',g,g.size);       %Hoaca = myload2 (path,'Hoaca','Hoa','ca',size);
+    g.Hoaca = loaddata (path,'Hoaca','Hoa','ca',g,g.size);       
     waitbar(3/5,hwait,'已载入Hoaca');
-    g.Hcbib = loaddata (path,'Hcbib','Hcb','ib',g,g.size);       %Hcbib = myload2 (path,'Hcbib','Hcb','ib',size);
+    g.Hcbib = loaddata (path,'Hcbib','Hcb','ib',g,g.size);       
     waitbar(4/5,hwait,'已载入Hcbib');
-    g.Hsoaib =loaddata(path,'Hsoaib','Hsoa','ib',g,g.size);        %Hsoaib = myload2(path,'Hsoaib','Hsoa','ib',size);
+    g.Hsoaib =loaddata(path,'Hsoaib','Hsoa','ib',g,g.size);        
     waitbar(1,hwait,'已载入Hsoaib');
     pause(0.1);
     close(hwait);
      bool= 1;
 
-     elseif(g_1.method == 2)%第二类间接逆子结构法
+     elseif(g.method == 2)%第二类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
     g.Hoaca = loaddata (path,'Hoaca','Hoa','ca',g,g.size);
     waitbar(1/7,hwait,'已载入Hoaca');
@@ -58,7 +62,7 @@ function  [bool] =  load_needed_data(path,g)
     close(hwait);
      bool= 1;
 
-     elseif(g_1.method == 3)%第三类间接逆子结构法
+     elseif(g.method == 3)%第三类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
     g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);       %Hcaca = myload2 (path,'Hcaca','HAca','ca',size);
     waitbar(1/5,hwait,'已载入Hcaca');
@@ -74,7 +78,7 @@ function  [bool] =  load_needed_data(path,g)
     close(hwait);
      bool= 1;
 
-    elseif(g_1.method == 4)%第四类间接逆子结构法
+    elseif(g.method == 4)%第四类间接逆子结构法
     hwait=waitbar(0,'载入中，请稍后>>>>>>>>');    %function ret=myload2(path,name,head,tail,size)
     g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);       %Hcaca = myload2 (path,'Hcaca','Hca','ca',size);
     waitbar(1/5,hwait,'已载入Hcaca');
@@ -90,23 +94,24 @@ function  [bool] =  load_needed_data(path,g)
     close(hwait);
      bool= 1;
 
-     elseif(g_1.method == 5)%第五类间接逆子结构法
+     elseif(g.method == 5)%第五类间接逆子结构法
         hwait=waitbar(0,'载入中，请稍后>>>>>>>>');
         g.Hcaca = loaddata (path,'Hcaca','Hca','ca',g,g.size);
         waitbar(1/6,hwait,'已载入Hcaca');
         g.Hcbcb =loaddata (path,'Hcbcb','Hcb','cb',g,g.size);
         waitbar(2/6,hwait,'已载入Hcbcb');
-        g.Hcaia = loaddata (path,'Hcaia','Hca','ia',g,g.size);
+        g.Hcaia = loaddata (path,'Hcaia','Hca','ia',g,g.size);        %
         waitbar(3/6,hwait,'已载入Hcaia');
-        g.Hcbib =loaddata(path,'Hcbib','Hcb','ib',g,g.size);
+       g.Hcbib =loaddata(path,'Hcbib','Hcb','ib',g,g.size);
         waitbar(4/6,hwait,'已载入Hcbib');
         g.Hoaca = loaddata (path,'Hoaca','Hoa','ca',g,g.size);       %Hoaca = myload2 (path,'Hoaca','Hoa','ca',size);
         waitbar(5/6,hwait,'已载入Hoaca');
-        g.Hscaia =loaddata(path,'Hscaia','Hsca','ia',g,g.size);
+        g.Hscaia =loaddata(path,'Hscaia','Hsca','ia',g,g.size);      %
         waitbar(1,hwait,'已载入Hscaia');
-
+        
         pause(0.1);
         close(hwait);
+        
      bool= 1;
      else
 
@@ -119,28 +124,30 @@ function  [bool] =  load_needed_data(path,g)
 %global  f   f为数据的第一个，代表频率
 matLength = 401;
 %根据输入参数的个数，判断是在使用直接法还是间接法
+folder = [path '\' name ];
+ret = 0;
+if~exist(folder,'dir')
+msgbox(['找不到文件夹',name,' ,请检查数据是否齐全，或数据路径是否设置正确'],'错误','non-modal');
+return ;
+end
 switch nargin
     %使用直接法（此方法不要求激励点和响应点数目一致）
     case 7
          c = mat2cell(zeros((row),(col)*matLength),ones((row),1), matLength*ones((col),1));      %将矩阵转换为元胞数组  cell=mat2Cell(data,column,row)
     for i=1:row
-        a=num2str(i);
         for j=1:col
-            b=num2str(j);
-        file=[path '\' name '\' head  a tail b '.mat'];    %所得的.mat为struct结构，里面有7个1xmatLength的向量
-        if ~exist(file,'file')      %%判断路径是否存在文件
-            msgbox(['找不到文件' , head a tail b , '或路径不存在'],'错误', 'error','non-modal');
-            %uiwait;
-            %continue;%set 0
-            return;
-        end
-        temp=importdata(file);
-        tempval=temp.a4+1i*temp.a5;    % 1i 表示虚数单位    只取其中的第五第六组数据
-        c{i,j}=tempval;
+         [tempval temp]=loadSingleData(folder,head,tail,i,j);%加载单个mat文件的数据
+         if ~isequal(size(tempval),1) %需要的.mat文件存在且加载成功
+             c{i,j}=tempval;
+         else 
+             ret = 0;return;
+         end
 %         display (file)  %test
         end
     end
     ret=cell2mat(c);    %将元胞数组转换为矩阵
+%     Name = [head tail];
+%      set(g, Name,ret);
      if ~exist('A','var')&&isequal(length(g.f),0)  
           g.f=temp.a0;
      end
@@ -153,11 +160,23 @@ switch nargin
         %使用间接法（当且仅当激励点和响应点一样多的时候，才能使用此间接法）
         ret = loaddata(path,name,head,tail,g,row,row);
     case 0
-    otherwise
-       return
+        otherwise
+             return
 end
-
-
+ 
+ %加载单个的mat文件
+     function [tempval temp] = loadSingleData(folder,head,tail,i,j)
+        a=num2str(i);       
+         b=num2str(j);
+        file=[folder '\' head  a tail b '.mat'];    %所得的.mat为struct结构，里面有7个1xmatLength的向量
+        if ~exist(file,'file')      %%判断路径是否存在文件
+            msgbox(['找不到文件' , head a tail b , '或路径不存在'],'错误', 'error','non-modal');
+              tempval = 0; %uiwait;
+            %continue;%set 0          
+            return ;
+        end
+        temp=importdata(file);
+        tempval=temp.a4+1i*temp.a5;    % 1i 表示虚数单位    只取其中的第五第六组数据
 
 
 

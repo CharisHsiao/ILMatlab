@@ -1,4 +1,5 @@
 classdef Project <handle
+%     g = Prject();
     properties
         method
     	Ks
@@ -7,9 +8,9 @@ classdef Project <handle
         f
         PC
         FT
-        caSize%耦合点
-        oaSize%响应点
-        ibSize%激励点
+        caSize  %耦合点
+        oaSize   %响应点
+        ibSize   %激励点
         size
         Hscaca
         Hscacb
@@ -27,6 +28,18 @@ classdef Project <handle
         Hcaia 
         Hscaia
     end
+%         methods
+%             function bool =set(path,head,tail)
+%                 if ~method 
+%                     n = 
+%             end
+%             
+%             function bool =set(path,head,tail,i,j)
+%             end
+             
+             
+              
+%     end
 end
 
 
