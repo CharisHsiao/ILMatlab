@@ -8,6 +8,7 @@ classdef Project <handle
         f
         PC
         FT
+        matLength
         caSize  %耦合点
         oaSize   %响应点
         ibSize   %激励点

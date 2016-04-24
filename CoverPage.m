@@ -1250,7 +1250,7 @@ function Start_GenerateExcel_Callback(hObject, eventdata, handles)
 % hObject    handle to Start_GenerateExcel (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+GenerateExcelUI;
 
 % --------------------------------------------------------------------
 function Start_GenerateMat_Callback(hObject, eventdata, handles)

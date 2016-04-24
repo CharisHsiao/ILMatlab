@@ -22,7 +22,7 @@ function varargout = GenerateExcelUI(varargin)
 
 % Edit the above text to modify the response to help GenerateExcelUI
 
-% Last Modified by GUIDE v2.5 11-Apr-2016 20:13:49
+% Last Modified by GUIDE v2.5 17-Apr-2016 20:18:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -71,3 +71,65 @@ function varargout = GenerateExcelUI_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+
+% --- Executes on button press in KS_save.
+function KS_save_Callback(hObject, eventdata, handles)
+% hObject    handle to KS_save (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of KS_save
+
+
+% --- Executes on button press in FT_save.
+function FT_save_Callback(hObject, eventdata, handles)
+% hObject    handle to FT_save (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of FT_save
+
+
+% --- Executes on button press in PC_save.
+function PC_save_Callback(hObject, eventdata, handles)
+% hObject    handle to PC_save (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of PC_save
+
+
+% --- Executes on button press in export.
+function export_Callback(hObject, eventdata, handles)
+% hObject    handle to export (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global g_1
+select = zeros(1, 3);
+select(1,1) = get(handles.KS_save,'Value');
+select(1,2) = get(handles.FT_save,'Value');
+select(1,3) = get(handles.PC_save,'Value');
+% select(1,4) = get(handles.C_save,'Value');
+% select(1,5) = get(handles.Kss_save,'Value');
+
+if(sum(select) == 0)
+    msgbox('请选择导出内容!','错误', 'error','non-modal');
+elseif(~GenerateExcel(g_1, select))    %根据不同的返回值提示错误类型
+    msgbox('导出Excel文件时出错!','错误', 'error','non-modal');
+else
+    msgbox('导出成功!');
+    close GenerateExcelUI;
+end
+
+
+
+
+% --- Executes on button press in cancel.
+function cancel_Callback(hObject, eventdata, handles)
+% hObject    handle to cancel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+close GenerateExcelUI;
+
+
