@@ -57,7 +57,9 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
-
+set(handles.KS_save,'Value',1);
+set(handles.PC_save,'Value',1);
+set(handles.FT_save,'Value',1);
 % UIWAIT makes GenerateExcelUI wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -78,6 +80,7 @@ function KS_save_Callback(hObject, eventdata, handles)
 % hObject    handle to KS_save (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
 
 % Hint: get(hObject,'Value') returns toggle state of KS_save
 

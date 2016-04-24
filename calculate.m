@@ -514,7 +514,7 @@ function  cal_PC(g)
           for k=1:g.matLength
             temp=temp+(g.C(j,j,k)*g.Hcbib(j,i,k))^2;
           end
-               g.FT(i,j)= sqrt(temp/g.matLength);
+               g.FT(j,i)= sqrt(temp/g.matLength);
         end
       end
 temp=0;
